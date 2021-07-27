@@ -1,7 +1,8 @@
-package com.example.goodevening
+package com.example.goodevening.superview.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.goodevening.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
