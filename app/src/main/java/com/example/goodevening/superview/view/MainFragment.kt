@@ -16,7 +16,10 @@ import com.example.goodevening.superview.viewmodel.MainViewModel
 
 class MainFragment : Fragment() {
     lateinit var viewModel:MainViewModel
-    lateinit var binding: MainFragmentBinding
+    private var _binding: MainFragmentBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
     companion object {
         fun newInstance()= MainFragment()
     }
@@ -55,7 +58,12 @@ class MainFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        binding = MainFragmentBinding.inflate(inflater, container, false)
+        _binding = MainFragmentBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
