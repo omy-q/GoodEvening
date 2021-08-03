@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:id="@+id/item_card_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="70dp">
+    app:cardCornerRadius="30dp"
+    android:padding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,10 +17,11 @@
         <ImageView
             android:id="@+id/film_poster_card_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/test_height_film_image"
             android:contentDescription="@string/film_poster_card_view"
-            android:src="@android:drawable/ic_menu_add"
-            android:padding="5dp"/>
+            android:src="@drawable/film_test"
+            android:padding="5dp"
+            android:scaleType="centerCrop"/>
 
         <TextView
             android:id="@+id/film_name_card_view"
