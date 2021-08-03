@@ -7,6 +7,6 @@ interface Facade {
     // получение данных с сервера
     // временно возвращает один конктреных фильм
 
-    fun getLocalData() : Film
+    fun getLocalData() : List<Film>
     // временный метод для проверки работы
 }
