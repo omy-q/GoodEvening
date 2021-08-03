@@ -6,20 +6,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
-        android:id="@+id/film_poster"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_menu_add"
+        android:id="@+id/poster"
+        android:layout_width="@dimen/width_description"
+        android:layout_height="@dimen/height_description"
+        android:layout_margin="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/film_test"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/film_description"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/film_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/film_poster"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/test_description"/>
+        android:id="@+id/description"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/height_description"
+        android:layout_margin="16dp"
+        android:text="@string/test_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/poster"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -67,6 +67,7 @@
     </TableLayout>
 
     <include
+        android:id="@+id/film_description"
         layout="@layout/film_description"/>
 
 </LinearLayout>
