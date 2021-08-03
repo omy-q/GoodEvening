@@ -1,9 +1,15 @@
 package com.example.goodevening.domainmodel
 
-class Film (val name :String = "Animal",
-            val year : String = "2015",
-            val country :String = "America",
-            val genres : List<String> = listOf("comedy", "triller")) {
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+class Film(
+    val name: String = "Animal",
+    val year: String = "2015",
+    val country: String = "America",
+    val genres: List<String> = listOf("comedy", "triller")) : Parcelable{
+
 }
 
 fun getFilms(): List<Film> {
