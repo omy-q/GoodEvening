@@ -3,4 +3,6 @@
     <dimen name="film_data_text_size">20sp</dimen>
     <dimen name="film_data_padding">5dp</dimen>
     <dimen name="test_height_film_image">250dp</dimen>
+    <dimen name="height_description">300dp</dimen>
+    <dimen name="width_description">250dp</dimen>
 </resources>
