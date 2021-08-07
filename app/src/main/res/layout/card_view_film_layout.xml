@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="30dp"
+    app:cardCornerRadius="10dp"
     android:padding="10dp">
 
     <LinearLayout
@@ -12,12 +12,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_gravity="center"
-        android:padding="@dimen/film_data_padding">
+        android:padding="5dp">
 
         <ImageView
             android:id="@+id/film_poster_card_view"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/test_height_film_image"
+            android:layout_height="@dimen/height_film_image"
             android:contentDescription="@string/film_poster_card_view"
             android:src="@drawable/film_test"
             android:padding="5dp"
@@ -27,8 +27,7 @@
             android:id="@+id/film_name_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/film_data_text_size"
-            android:text="@string/test_name"
+            android:textSize="@dimen/text_size_name"
             android:gravity="center"
             android:padding="5dp"/>
 
@@ -36,8 +35,7 @@
             android:id="@+id/film_year_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/film_data_text_size"
-            android:text="@string/text_year"
+            android:textSize="@dimen/text_size"
             android:gravity="center"
             android:padding="5dp"/>
 
@@ -45,8 +43,7 @@
             android:id="@+id/film_country_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/film_data_text_size"
-            android:text="@string/test_country"
+            android:textSize="@dimen/text_size"
             android:gravity="center"
             android:padding="5dp"/>
 
