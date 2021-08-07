@@ -9,7 +9,7 @@
         android:id="@+id/RecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/card_view_film_layout" />
+        tools:listitem="@layout/parent_item_view"/>
     <FrameLayout
         android:id="@+id/loadingLayout"
         android:layout_width="match_parent"
