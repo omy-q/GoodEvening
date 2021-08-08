@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,6 +10,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/test"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/test_type_film" />
@@ -17,8 +18,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/RecyclerViewFilm"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/child_item_view" />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
