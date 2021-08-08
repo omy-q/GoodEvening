@@ -6,12 +6,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.goodevening.R
 import com.example.goodevening.domainmodel.Film
 
-class FilmAdapter(private var onItemViewClickListener: MainFragment.OnItemViewClickListener?) :
+class FilmAdapter() :
     RecyclerView.Adapter<FilmAdapter.ViewHolder>() {
 
     private var filmData: List<Film> = listOf()
@@ -21,33 +20,30 @@ class FilmAdapter(private var onItemViewClickListener: MainFragment.OnItemViewCl
         notifyDataSetChanged()
     }
 
-    fun removeListener() {
-        onItemViewClickListener = null
-    }
+//    fun removeListener() {
+//        onItemViewClickListener = null
+//    }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private var posterImageView: ImageView? = null
-        private var nameTextView: TextView? = itemView.findViewById(R.id.film_name_card_view)
-        private var yearTextView: TextView? = itemView.findViewById(R.id.film_year_card_view)
-        private var countryTextView: TextView? = itemView.findViewById(R.id.film_country_card_view)
+        private var nameTextView: TextView = itemView.findViewById(R.id.film_name_card_view)
+        private var yearTextView: TextView = itemView.findViewById(R.id.film_year_card_view)
+        private var countryTextView: TextView = itemView.findViewById(R.id.film_country_card_view)
 
-        fun bind(film: Film) {
+        fun bind(film:Film) {
             posterImageView = itemView.findViewById(R.id.film_poster_card_view)
-            nameTextView?.text = film.name
-            yearTextView?.text = film.year
-            countryTextView?.text = film.country
-//            val cardView : CardView = itemView.findViewById(R.id.item_card_view)
+            nameTextView.text = film.name
+            yearTextView.text = film.year
+            countryTextView.text = film.country
             itemView.setOnClickListener {
                 Toast.makeText(itemView.context, "Item_Card_View", Toast.LENGTH_LONG).show()
-                onItemViewClickListener?.onItemViewClick(film)
+//                onItemViewClickListener?.onItemViewClick(film)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmAdapter.ViewHolder {
-        return ViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.card_view_film_layout, parent, false) as View
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.child_item_view, parent, false) as View
         )
     }
 
