@@ -16,6 +16,7 @@ import com.example.goodevening.databinding.MainFragmentBinding
 import com.example.goodevening.domainmodel.Film
 import com.example.goodevening.superview.viewmodel.AppState
 import com.example.goodevening.superview.viewmodel.MainViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class MainFragment : Fragment() {
     private val viewModel: MainViewModel by lazy { ViewModelProvider(this).get(MainViewModel::class.java) }
@@ -65,13 +66,13 @@ class MainFragment : Fragment() {
                     RecyclerView.layoutManager = GridLayoutManager(context, 3)
                     RecyclerView.adapter = adapter
                     adapter.setFilm(appState.filmData)
-//                    root.showMessageByID(R.string.success, Snackbar.LENGTH_LONG)
+                    root.showMessageByID(R.string.success, Snackbar.LENGTH_LONG)
                 }
             }
             AppState.Loading -> {
                 with(binding) {
                     loadingLayout.visibility = View.VISIBLE
-//                    root.showMessageByText("Loading", Snackbar.LENGTH_LONG)
+                    root.showMessageByText("Loading", Snackbar.LENGTH_LONG)
                 }
             }
         }
@@ -85,5 +86,13 @@ class MainFragment : Fragment() {
 
     interface OnItemViewClickListener {
         fun onItemViewClick(film: Film)
+    }
+
+    private fun View.showMessageByID(resourceID: Int, duration: Int) {
+        Snackbar.make(this, requireActivity().resources.getString(resourceID), duration).show()
+    }
+
+    private fun View.showMessageByText(text: String, duration: Int) {
+        Snackbar.make(this, text, duration).show()
     }
 }
