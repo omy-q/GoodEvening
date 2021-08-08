@@ -9,25 +9,25 @@ import kotlin.random.Random
 
 class MainViewModel(
     private val liveDataObserver: MutableLiveData<AppState> = MutableLiveData(),
-    val facade: Facade = FacadeImpl()
-) : ViewModel() {
+    private val facade: Facade = FacadeImpl()) : ViewModel() {
+
     fun getLiveData() = liveDataObserver
 
     fun getFilm() = getDataFromLocalSource()
 
 
     private fun getDataFromLocalSource() {
-        when ((1..2).random()) {
-            1 -> {
-                liveDataObserver.postValue(AppState.Loading)
-                sleep(3000)
-            }
-            2 -> {liveDataObserver.postValue(AppState.Success(facade.getLocalData())) }
-        }
-//        Thread {
-//            liveDataObserver.postValue(AppState.Loading)
-//            sleep(2000)
-//            liveDataObserver.postValue(AppState.Success(facade.getLocalData()))
-//        }.start()
+//        when ((1..2).random()) {
+//            1 -> {
+//                liveDataObserver.postValue(AppState.Loading)
+//                sleep(3000)
+//            }
+//            2 -> {liveDataObserver.postValue(AppState.Success(facade.getLocalData())) }
+//        }
+        Thread {
+            liveDataObserver.postValue(AppState.Loading)
+            sleep(2000)
+            liveDataObserver.postValue(AppState.Success(facade.getLocalData()))
+        }.start()
     }
 }
