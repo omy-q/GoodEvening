@@ -10,11 +10,12 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.goodevening.R
 import com.example.goodevening.domainmodel.Film
+import org.w3c.dom.Text
 
 class FilmAdapter(private var onItemViewClickListener: MainFragment.OnItemViewClickListener?) :
     RecyclerView.Adapter<FilmAdapter.ViewHolder>() {
 
-    private var filmData: List<Film> = listOf()
+    private lateinit var filmData: List<Film>
 
     fun setFilm(data: List<Film>) {
         filmData = data
@@ -26,20 +27,17 @@ class FilmAdapter(private var onItemViewClickListener: MainFragment.OnItemViewCl
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private var posterImageView: ImageView? = null
-        private var nameTextView: TextView? = itemView.findViewById(R.id.film_name_card_view)
-        private var yearTextView: TextView? = itemView.findViewById(R.id.film_year_card_view)
-        private var countryTextView: TextView? = itemView.findViewById(R.id.film_country_card_view)
 
-        fun bind(film: Film) {
-            posterImageView = itemView.findViewById(R.id.film_poster_card_view)
-            nameTextView?.text = film.name
-            yearTextView?.text = film.year
-            countryTextView?.text = film.country
-//            val cardView : CardView = itemView.findViewById(R.id.item_card_view)
-            itemView.setOnClickListener {
-                Toast.makeText(itemView.context, "Item_Card_View", Toast.LENGTH_LONG).show()
-                onItemViewClickListener?.onItemViewClick(film)
+        fun init(film: Film) {
+            with(itemView) {
+                findViewById<ImageView>(R.id.film_poster_card_view).setImageResource(R.drawable.film_test)
+                findViewById<TextView>(R.id.film_name_card_view).text = film.name
+                findViewById<TextView>(R.id.film_year_card_view).text = film.year
+                findViewById<TextView>(R.id.film_country_card_view).text = film.country
+                setOnClickListener {
+                    Toast.makeText(itemView.context, "Item_Card_View", Toast.LENGTH_LONG).show()
+                    onItemViewClickListener?.onItemViewClick(film)
+                }
             }
         }
     }
@@ -52,8 +50,8 @@ class FilmAdapter(private var onItemViewClickListener: MainFragment.OnItemViewCl
     }
 
     override fun onBindViewHolder(holder: FilmAdapter.ViewHolder, position: Int) {
-        holder.bind(filmData[position])
+        holder.init(filmData[position])
     }
 
-    override fun getItemCount(): Int = filmData.size
+    override fun getItemCount() = filmData.size
 }
