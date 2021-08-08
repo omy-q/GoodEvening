@@ -1,6 +1,5 @@
 package com.example.goodevening.superview.view
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,15 +9,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.goodevening.R
 import com.example.goodevening.domainmodel.Film
 
-class FilmParentAdapter : RecyclerView.Adapter<FilmParentAdapter.ParentViewHolder>() {
+class FilmParentAdapter(onItemViewClickListener: OnItemViewClickListener?) : RecyclerView.Adapter<FilmParentAdapter.ParentViewHolder>() {
 
-    private var childAdapter : FilmAdapter = FilmAdapter()
+    private var childAdapter : FilmAdapter = FilmAdapter(onItemViewClickListener)
 
-    private var testVar : List<Film>  = listOf()
+    private var films : List<Film>  = listOf()
 
-    fun setTestMethod(data: List<Film>) {
-        testVar = data
-//        notifyDataSetChanged()
+    fun setData(data: List<Film>) {
+        films = data
+        notifyDataSetChanged()
+    }
+
+    fun removeListener() {
+        childAdapter.removeListener()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmParentAdapter.ParentViewHolder {
@@ -36,12 +39,11 @@ class FilmParentAdapter : RecyclerView.Adapter<FilmParentAdapter.ParentViewHolde
             childRecyclerView.adapter = childAdapter
             childRecyclerView.hasFixedSize()
             childAdapter.setFilm(films)
-
         }
     }
 
     override fun onBindViewHolder(holder: FilmParentAdapter.ParentViewHolder, position: Int) {
-        holder.bind(testVar, position)
+        holder.bind(films, position)
     }
 
     override fun getItemCount() = 10

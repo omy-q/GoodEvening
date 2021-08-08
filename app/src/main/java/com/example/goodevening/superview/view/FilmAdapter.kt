@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.goodevening.R
 import com.example.goodevening.domainmodel.Film
 
-class FilmAdapter() :
+class FilmAdapter(private var onItemViewClickListener: OnItemViewClickListener?) :
     RecyclerView.Adapter<FilmAdapter.ViewHolder>() {
 
     private var filmData: List<Film> = listOf()
@@ -20,9 +20,9 @@ class FilmAdapter() :
         notifyDataSetChanged()
     }
 
-//    fun removeListener() {
-//        onItemViewClickListener = null
-//    }
+    fun removeListener() {
+        onItemViewClickListener = null
+    }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private var posterImageView: ImageView? = null
@@ -37,7 +37,7 @@ class FilmAdapter() :
             countryTextView.text = film.country
             itemView.setOnClickListener {
                 Toast.makeText(itemView.context, "Item_Card_View", Toast.LENGTH_LONG).show()
-//                onItemViewClickListener?.onItemViewClick(film)
+                onItemViewClickListener?.onItemViewClick(film)
             }
         }
     }
