@@ -17,13 +17,6 @@ class MainViewModel(
 
 
     private fun getDataFromLocalSource() {
-//        when ((1..2).random()) {
-//            1 -> {
-//                liveDataObserver.postValue(AppState.Loading)
-//                sleep(3000)
-//            }
-//            2 -> {liveDataObserver.postValue(AppState.Success(facade.getLocalData())) }
-//        }
         Thread {
             liveDataObserver.postValue(AppState.Loading)
             sleep(2000)
