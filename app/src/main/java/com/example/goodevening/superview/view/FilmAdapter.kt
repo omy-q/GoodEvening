@@ -6,13 +6,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.goodevening.R
 import com.example.goodevening.domainmodel.Film
 import org.w3c.dom.Text
 
-class FilmAdapter(private var onItemViewClickListener: MainFragment.OnItemViewClickListener?) :
+class FilmAdapter(private var onItemViewClickListener: OnItemViewClickListener?) :
     RecyclerView.Adapter<FilmAdapter.ViewHolder>() {
 
     private lateinit var filmData: List<Film>
@@ -43,9 +42,7 @@ class FilmAdapter(private var onItemViewClickListener: MainFragment.OnItemViewCl
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmAdapter.ViewHolder {
-        return ViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.card_view_film_layout, parent, false) as View
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.child_item_view, parent, false) as View
         )
     }
 

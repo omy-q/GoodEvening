@@ -4,14 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.goodevening.R
-import com.example.goodevening.databinding.ActivityMainBinding
 import com.example.goodevening.databinding.MainFragmentBinding
 import com.example.goodevening.domainmodel.Film
 import com.example.goodevening.superview.viewmodel.AppState
@@ -20,8 +18,7 @@ import com.google.android.material.snackbar.Snackbar
 
 class MainFragment : Fragment() {
     private val viewModel: MainViewModel by lazy { ViewModelProvider(this).get(MainViewModel::class.java) }
-
-    private val adapter = FilmAdapter(object : OnItemViewClickListener {
+    private val parentAdapter = FilmParentAdapter(object : OnItemViewClickListener {
         override fun onItemViewClick(film: Film) {
             activity?.supportFragmentManager?.apply {
                 beginTransaction()
@@ -63,9 +60,9 @@ class MainFragment : Fragment() {
             is AppState.Success -> {
                 with(binding) {
                     loadingLayout.visibility = View.GONE
-                    RecyclerView.layoutManager = GridLayoutManager(context, 3)
-                    RecyclerView.adapter = adapter
-                    adapter.setFilm(appState.filmData)
+                    RecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                    RecyclerView.adapter = parentAdapter
+                    parentAdapter.setData(appState.filmData)
                     root.showMessageByID(R.string.success, Snackbar.LENGTH_LONG)
                 }
             }
@@ -81,11 +78,7 @@ class MainFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-        adapter.removeListener()
-    }
-
-    interface OnItemViewClickListener {
-        fun onItemViewClick(film: Film)
+        parentAdapter.removeListener()
     }
 
     private fun View.showMessageByID(resourceID: Int, duration: Int) {
