@@ -16,17 +16,18 @@ import com.example.goodevening.databinding.MainFragmentBinding
 import com.example.goodevening.domainmodel.Film
 import com.example.goodevening.superview.viewmodel.AppState
 import com.example.goodevening.superview.viewmodel.MainViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class MainFragment : Fragment() {
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by lazy { ViewModelProvider(this).get(MainViewModel::class.java) }
+
     private val adapter = FilmAdapter(object : OnItemViewClickListener {
         override fun onItemViewClick(film: Film) {
-            val manager = activity?.supportFragmentManager
-            if (manager != null) {
-                val bundle = Bundle()
-                bundle.putParcelable(FilmFragment.BUNDLE_EXTRA, film)
-                manager.beginTransaction()
-                    .replace(R.id.fragment_container, FilmFragment.newInstance(bundle))
+            activity?.supportFragmentManager?.apply {
+                beginTransaction()
+                    .replace(R.id.fragment_container, FilmFragment.newInstance(Bundle().apply {
+                        putParcelable(FilmFragment.BUNDLE_EXTRA, film)
+                    }))
                     .addToBackStack("")
                     .commitAllowingStateLoss()
             }
@@ -34,26 +35,23 @@ class MainFragment : Fragment() {
     })
 
     private var _binding: MainFragmentBinding? = null
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+
     companion object {
         fun newInstance() = MainFragment()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        viewModel.getLiveData().observe(viewLifecycleOwner, Observer {renderData(it)})
-        viewModel.getFilm()
+        with(viewModel) {
+            getLiveData().observe(viewLifecycleOwner, Observer { renderData(it) })
+            getFilm()
+        }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
         _binding = MainFragmentBinding.inflate(inflater, container, false)
-        val recycler = binding.RecyclerView
-        recycler.layoutManager = GridLayoutManager(context, 3)
-        recycler.adapter = adapter
         return binding.root
     }
 
@@ -63,13 +61,19 @@ class MainFragment : Fragment() {
                 Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
             }
             is AppState.Success -> {
-                binding.loadingLayout.visibility = View.GONE
-                Toast.makeText(context, "Success", Toast.LENGTH_LONG).show()
-                adapter.setFilm(appState.filmData)
+                with(binding) {
+                    loadingLayout.visibility = View.GONE
+                    RecyclerView.layoutManager = GridLayoutManager(context, 3)
+                    RecyclerView.adapter = adapter
+                    adapter.setFilm(appState.filmData)
+                    root.showMessageByID(R.string.success, Snackbar.LENGTH_LONG)
+                }
             }
             AppState.Loading -> {
-                binding.loadingLayout.visibility = View.VISIBLE
-                Toast.makeText(context, "Loading", Toast.LENGTH_LONG).show()
+                with(binding) {
+                    loadingLayout.visibility = View.VISIBLE
+                    root.showMessageByText("Loading", Snackbar.LENGTH_LONG)
+                }
             }
         }
     }
@@ -82,5 +86,13 @@ class MainFragment : Fragment() {
 
     interface OnItemViewClickListener {
         fun onItemViewClick(film: Film)
+    }
+
+    private fun View.showMessageByID(resourceID: Int, duration: Int) {
+        Snackbar.make(this, requireActivity().resources.getString(resourceID), duration).show()
+    }
+
+    private fun View.showMessageByText(text: String, duration: Int) {
+        Snackbar.make(this, text, duration).show()
     }
 }

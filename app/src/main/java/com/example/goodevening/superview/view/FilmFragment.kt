@@ -17,14 +17,18 @@ class FilmFragment : Fragment() {
 
     companion object {
         const val BUNDLE_EXTRA = "film"
-        fun newInstance(bundle : Bundle) : FilmFragment {
+        fun newInstance(bundle: Bundle): FilmFragment {
             val fragment = FilmFragment()
             fragment.arguments = bundle
             return fragment
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         _binding = FilmFragmentBinding.inflate(inflater, container, false)
         return binding.root
@@ -32,15 +36,24 @@ class FilmFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val film = arguments?.getParcelable<Film>(BUNDLE_EXTRA)
-        if (film != null) {
-            binding.filmName.text = film.name
-            binding.filmRating.text = "5"
-            binding.filmTime.text = "2.15"
-            binding.filmYear.text = film.year
-            binding.filmCountry.text = film.country
-            binding.filmDescription.poster.setImageResource(R.drawable.film_test)
-            binding.filmDescription.description.text = "DEFAULT"
+        arguments?.getParcelable<Film>(BUNDLE_EXTRA)?.let{film -> setData(film)}
+    }
+
+    private fun setData(film : Film){
+        with(binding) {
+            filmName.text = film.name
+            filmRating.text = "5"
+            filmTime.text = "2.15"
+            filmYear.text = film.year
+            filmCountry.text = film.country
+            filmDescription.poster.setImageResource(com.example.goodevening.R.drawable.film_test)
+            filmDescription.description.text = "DEFAULT"
         }
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
