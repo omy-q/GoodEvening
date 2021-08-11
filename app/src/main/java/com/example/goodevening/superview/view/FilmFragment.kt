@@ -38,12 +38,12 @@ class FilmFragment : Fragment() {
     private fun setData(film : Film){
         with(binding) {
             filmName.text = film.name
-            filmRating.text = "5"
+            filmRating.text = film.average.toString()
             filmTime.text = "2.15"
             filmYear.text = film.year
-            filmCountry.text = film.country
+            filmCountry.text = "US"
             filmDescription.poster.setImageResource(com.example.goodevening.R.drawable.film_test)
-            filmDescription.description.text = "DEFAULT"
+            filmDescription.description.text = film.description
         }
     }
 
