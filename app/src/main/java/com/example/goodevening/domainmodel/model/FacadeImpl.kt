@@ -1,9 +1,15 @@
 package com.example.goodevening.domainmodel.model
 
-import com.example.goodevening.domainmodel.Film
-import com.example.goodevening.domainmodel.getFilms
+import com.example.goodevening.domainmodel.*
 
 class FacadeImpl : Facade {
-    override fun getServerData() = Film()
-    override fun getLocalData() = getFilms()
+    private var listenerResult: Facade.FilmLoaderListener? = null
+    override fun setListener(listener: Facade.FilmLoaderListener) {
+        this.listenerResult = listener
+    }
+    override fun getServerData(){
+        val filmLoader = FilmLoader(listenerResult, "popular")
+        filmLoader.loadFilm()
+    }
+    override fun getLocalData(): List<CategoryFilm> = listOf(CategoryFilm("popular", getFilms()))
 }
