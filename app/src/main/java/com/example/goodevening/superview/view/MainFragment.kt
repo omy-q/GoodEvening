@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.goodevening.R
 import com.example.goodevening.databinding.MainFragmentBinding
 import com.example.goodevening.domainmodel.Film
+import com.example.goodevening.superview.view.utils.showMessageByText
 import com.example.goodevening.superview.viewmodel.AppState
 import com.example.goodevening.superview.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -55,7 +56,10 @@ class MainFragment : Fragment() {
     private fun renderData(appState: AppState) {
         when (appState) {
             is AppState.Error -> {
-                Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
+                with(binding) {
+                    loadingLayout.visibility = View.GONE
+                    root.showMessageByText("Error", Snackbar.LENGTH_LONG)
+                }
             }
             is AppState.Success -> {
                 with(binding) {
@@ -63,7 +67,7 @@ class MainFragment : Fragment() {
                     RecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                     RecyclerView.adapter = parentAdapter
                     parentAdapter.setData(appState.filmData)
-                    root.showMessageByID(R.string.success, Snackbar.LENGTH_LONG)
+                    root.showMessageByText("Success", Snackbar.LENGTH_LONG)
                 }
             }
             AppState.Loading -> {
@@ -81,11 +85,11 @@ class MainFragment : Fragment() {
         parentAdapter.removeListener()
     }
 
-    private fun View.showMessageByID(resourceID: Int, duration: Int) {
-        Snackbar.make(this, requireActivity().resources.getString(resourceID), duration).show()
-    }
-
-    private fun View.showMessageByText(text: String, duration: Int) {
-        Snackbar.make(this, text, duration).show()
-    }
+//    private fun View.showMessageByID(resourceID: Int, duration: Int) {
+//        Snackbar.make(this, requireActivity().resources.getString(resourceID), duration).show()
+//    }
+//
+//    private fun View.showMessageByText(text: String, duration: Int) {
+//        Snackbar.make(this, text, duration).show()
+//    }
 }
