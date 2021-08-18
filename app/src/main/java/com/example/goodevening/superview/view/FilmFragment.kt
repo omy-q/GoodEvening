@@ -5,15 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.goodevening.R
 import com.example.goodevening.databinding.FilmFragmentBinding
 import com.example.goodevening.databinding.MainFragmentBinding
 import com.example.goodevening.domainmodel.Film
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.film_description.view.*
 
 class FilmFragment : Fragment() {
 
     private var _binding: FilmFragmentBinding? = null
     private val binding get() = _binding!!
+    private val genresAdapter = GenresAdapter()
 
     companion object {
         const val BUNDLE_EXTRA = "film"
@@ -42,8 +46,14 @@ class FilmFragment : Fragment() {
             filmTime.text = "2.15"
             filmYear.text = film.year
             filmCountry.text = "US"
-            filmDescription.poster.setImageResource(com.example.goodevening.R.drawable.film_test)
+            Picasso
+                .get()
+                .load(film.poster)
+                .into(filmDescription.poster)
             filmDescription.description.text = film.description
+            filmDescription.RecyclerGenres.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            filmDescription.RecyclerGenres.adapter = genresAdapter
+            genresAdapter.setData(film.genres)
         }
     }
 
