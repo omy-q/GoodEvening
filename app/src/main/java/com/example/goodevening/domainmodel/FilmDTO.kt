@@ -9,6 +9,8 @@ data class ResultDTO(
     val title: String,
     val overview: String,
     val release_date: String,
-    val vote_average: Float
+    val vote_average: Float,
+    val genre_ids : List<Int>,
+    val poster_path : String
 )
 
