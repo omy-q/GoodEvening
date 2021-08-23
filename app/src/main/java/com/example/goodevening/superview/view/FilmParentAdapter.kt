@@ -8,21 +8,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.goodevening.R
 import com.example.goodevening.domainmodel.CategoryFilm
-import com.example.goodevening.domainmodel.Film
 
-class FilmParentAdapter(onItemViewClickListener: OnItemViewClickListener?) :
+class FilmParentAdapter(private val onItemViewClickListener: OnItemViewClickListener?) :
     RecyclerView.Adapter<FilmParentAdapter.ParentViewHolder>() {
 
-    private var childAdapter: FilmAdapter = FilmAdapter(onItemViewClickListener)
+    private lateinit var childAdapters: MutableList<FilmAdapter>
     private lateinit var filmData: List<CategoryFilm>
 
     fun setData(data: List<CategoryFilm>) {
+        childAdapters = mutableListOf(FilmAdapter(onItemViewClickListener), FilmAdapter(onItemViewClickListener))
         filmData = data
         notifyDataSetChanged()
     }
 
     fun removeListener() {
-        childAdapter.removeListener()
+        for (childAdapter in childAdapters) {
+            childAdapter.removeListener()
+        }
     }
 
     override fun onCreateViewHolder(
@@ -38,7 +40,7 @@ class FilmParentAdapter(onItemViewClickListener: OnItemViewClickListener?) :
     inner class ParentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private lateinit var childRecyclerView: RecyclerView
 
-        fun init(filmCategory: CategoryFilm) {
+        fun init(filmCategory: CategoryFilm, position: Int) {
             with(itemView) {
                 findViewById<TextView>(R.id.test).text = filmCategory.category
                 childRecyclerView = findViewById(R.id.RecyclerViewFilm)
@@ -46,15 +48,15 @@ class FilmParentAdapter(onItemViewClickListener: OnItemViewClickListener?) :
             with(childRecyclerView) {
                 layoutManager =
                     LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
-                adapter = childAdapter
+                adapter = childAdapters[position]
                 hasFixedSize()
-                childAdapter.setFilm(filmCategory.films)
+                childAdapters[position].setFilm(filmCategory.films)
             }
         }
     }
 
     override fun onBindViewHolder(holder: FilmParentAdapter.ParentViewHolder, position: Int) {
-        holder.init(filmData[position])
+        holder.init(filmData[position], position)
     }
 
     override fun getItemCount() = filmData.size
