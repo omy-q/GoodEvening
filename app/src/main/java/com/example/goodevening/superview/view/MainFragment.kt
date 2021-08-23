@@ -1,10 +1,8 @@
 package com.example.goodevening.superview.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
+import android.view.*
+import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -21,6 +19,7 @@ class MainFragment : Fragment() {
     private val viewModel: MainViewModel by lazy { ViewModelProvider(this).get(MainViewModel::class.java) }
     private val parentAdapter = FilmParentAdapter(object : OnItemViewClickListener {
         override fun onItemViewClick(film: Film) {
+            viewModel.saveRecentFilmToDB(film)
             activity?.supportFragmentManager?.apply {
                 beginTransaction()
                     .replace(R.id.fragment_container, FilmFragment.newInstance(Bundle().apply {
@@ -34,6 +33,7 @@ class MainFragment : Fragment() {
 
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
+    private var switchAdult: SwitchCompat? = null
 
     companion object {
         fun newInstance() = MainFragment()
