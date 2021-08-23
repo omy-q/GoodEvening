@@ -1,6 +1,7 @@
 package com.example.goodevening.domainmodel.model
 
 import com.example.goodevening.domainmodel.CategoryFilm
+import com.example.goodevening.domainmodel.Film
 import com.example.goodevening.domainmodel.FilmDTO
 
 interface Facade {
@@ -10,4 +11,9 @@ interface Facade {
 
     fun getLocalData() : List<CategoryFilm>
     // временный метод для проверки работы
+
+    fun getDBRecentData() : CategoryFilm
+
+    fun saveRecentFilm(film: Film)
+
 }
