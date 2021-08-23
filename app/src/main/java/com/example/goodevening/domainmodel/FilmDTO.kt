@@ -6,6 +6,7 @@ data class FilmDTO(val results: List<ResultDTO>) {
 }
 
 data class ResultDTO(
+    val id : Long,
     val title: String,
     val overview: String,
     val release_date: String,
