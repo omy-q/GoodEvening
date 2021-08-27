@@ -1,5 +1,6 @@
 package com.example.goodevening.domainmodel.moviedb
 
+import com.example.goodevening.BuildConfig
 import com.example.goodevening.domainmodel.DATABASE_API_URL
 import com.example.goodevening.domainmodel.REQUEST_API_KEY_VALUE
 import com.google.gson.GsonBuilder
@@ -18,6 +19,6 @@ class RemoteDataSource {
         .build().create(FilmAPI::class.java)
 
     fun loadFilm(callback: Callback<FilmDTO>) {
-        filmApi.getFilm(REQUEST_API_KEY_VALUE).enqueue(callback)
+        filmApi.getFilm(BuildConfig.THE_MOVIEDB_API_KEY).enqueue(callback)
     }
 }

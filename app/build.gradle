@@ -27,7 +27,14 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        buildTypes.each{
+            Properties properties = new Properties()
+            properties.load(project.rootProject.file("apikey.properties").newDataInputStream())
+            def apiKey = properties.getProperty("REQUEST_API_KEY_VALUE", "")
+            it.buildConfigField "String", "THE_MOVIEDB_API_KEY", apiKey
+        }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
