@@ -2,8 +2,13 @@ package com.example.goodevening.app
 
 import android.app.Application
 import androidx.room.Room
-import com.example.goodevening.domainmodel.room.RecentDAO
-import com.example.goodevening.domainmodel.room.RecentDataBase
+import com.example.goodevening.domainmodel.room.DataBase
+import com.example.goodevening.domainmodel.room.favoritefilms.FavoriteDAO
+import com.example.goodevening.domainmodel.room.genres.GenresDAO
+import com.example.goodevening.domainmodel.room.popularfilms.PopularDAO
+import com.example.goodevening.domainmodel.room.recentfilms.RecentDAO
+import com.example.goodevening.domainmodel.room.watchedfilms.WatchedDAO
+import com.example.goodevening.domainmodel.room.willwatchfilms.WillWatchDAO
 
 class App : Application() {
 
@@ -14,24 +19,24 @@ class App : Application() {
 
     companion object {
         private var appInstance: App? = null
-        private var db: RecentDataBase? = null
-        private const val DB_NAME = "PopularFilms.db"
+        private var db: DataBase? = null
+        private const val DB_NAME = "Films.db"
 
-        fun getFilmDao(): RecentDAO {
+        fun getDB(): DataBase {
             if (db == null) {
-                synchronized(RecentDataBase::class.java) {
+                synchronized(DataBase::class.java) {
                     if (db == null) {
                         if (appInstance == null) throw IllegalStateException("Application is null while creating DataBase")
                         db = Room.databaseBuilder(
                             appInstance!!.applicationContext,
-                            RecentDataBase::class.java,
+                            DataBase::class.java,
                             DB_NAME)
                             .allowMainThreadQueries()
                             .build()
                     }
                 }
             }
-            return db!!.popularDao()
+            return db!!
         }
     }
 }
