@@ -5,6 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 class Film(
+    val id : Long,
     val name: String,
     val year: String,
     val description: String,
@@ -21,16 +22,16 @@ val genres = mapOf<Int, String>(28 to "Action", 12 to "Adventure", 16 to "Animat
 
 
 fun getFilms() = listOf(
-        Film("И гастнет свет", "2016", "Соединенные Штаты", 10.0f, listOf("default"), "default"),
-        Film("Любовь любит случайности", "2011", "Турция", 10.0f, listOf("default"), "default"),
-        Film("Август Раш", "2017", "Соединенные Штаты", 10.0f, listOf("default"), "default"),
-        Film("В метре друг от друга", "2019", "Соединенные Штаты", 10.0f, listOf("default"), "default"),
-        Film("Путь домой", "2019", "Соединенные Штаты", 10.0f, listOf("default"), "default"),
-        Film("Звездная пыль", "2007", "Исландия", 10.0f, listOf("default"), "default"),
-        Film("Чудо", "2017", "Соединенные Штаты", 10.0f, listOf("default"), "default"),
-        Film("Дальная дорога", "2015", "Соединенные Штаты", 10.0f, listOf("default"), "default"),
-        Film("Помни", "2000", "Соединенные Штаты", 10.0f, listOf("default"), "default"),
-        Film("Апгрейд", "2018", "Австралия", 10.0f, listOf("default"), "default"))
+        Film(11, "И гастнет свет", "2016", "Соединенные Штаты", 10.0f, listOf("default"), "default"),
+        Film(12,"Любовь любит случайности", "2011", "Турция", 10.0f, listOf("default"), "default"),
+        Film(13,"Август Раш", "2017", "Соединенные Штаты", 10.0f, listOf("default"), "default"),
+        Film(14,"В метре друг от друга", "2019", "Соединенные Штаты", 10.0f, listOf("default"), "default"),
+        Film(15,"Путь домой", "2019", "Соединенные Штаты", 10.0f, listOf("default"), "default"),
+        Film(16,"Звездная пыль", "2007", "Исландия", 10.0f, listOf("default"), "default"),
+        Film(17,"Чудо", "2017", "Соединенные Штаты", 10.0f, listOf("default"), "default"),
+        Film(18,"Дальная дорога", "2015", "Соединенные Штаты", 10.0f, listOf("default"), "default"),
+        Film(19,"Помни", "2000", "Соединенные Штаты", 10.0f, listOf("default"), "default"),
+        Film(10,"Апгрейд", "2018", "Австралия", 10.0f, listOf("default"), "default"))
 
 
 
