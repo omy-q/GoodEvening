@@ -3,26 +3,55 @@ package com.example.goodevening.domainmodel.model
 import com.example.goodevening.domainmodel.*
 import com.example.goodevening.domainmodel.moviedb.FilmDTO
 import com.example.goodevening.domainmodel.moviedb.RemoteDataSource
-import com.example.goodevening.domainmodel.utils.convertFilmToEntity
-import com.example.goodevening.domainmodel.utils.convertRecentEntityToCategoryFilm
-import com.example.goodevening.room.RecentDAO
+import com.example.goodevening.domainmodel.room.facade.RoomFacade
+import com.example.goodevening.domainmodel.utils.*
 
 class FacadeImpl(private val remoteDataSource: RemoteDataSource,
-                 private val localDataSource: RecentDAO) : Facade {
+                 private val localDataSource: RoomFacade
+) : Facade {
 
     override fun getServerData(callback: retrofit2.Callback<FilmDTO>){
         remoteDataSource.loadFilm(callback)
     }
 
-    override fun getLocalData(): List<CategoryFilm> = listOf(CategoryFilm("popular", getFilms()))
-
-
-    override fun getDBRecentData(): CategoryFilm {
-        return convertRecentEntityToCategoryFilm(localDataSource.all())
+    override fun getDBRecentFilms(): CategoryFilm {
+        return convertRecentEntityToCategoryFilm(localDataSource.getRecentFilms().all())
     }
 
     override fun saveRecentFilm(film: Film) {
-        localDataSource.insert(convertFilmToEntity(film))
+        localDataSource.getRecentFilms().insert(convertFilmToRecentEntity(film))
 
+    }
+
+    override fun getDBFavoriteFilms(): CategoryFilm {
+        return convertFavoriteEntityToCategoryFilm(localDataSource.getFavoriteFilms().all())
+    }
+
+    override fun saveDBFavoriteFilm(film: Film) {
+        localDataSource.getFavoriteFilms().insert(convertFilmToFavoriteEntity(film))
+    }
+
+    override fun getDBWatchedFilms(): CategoryFilm {
+        return convertWatchedEntityToCategoryFilm(localDataSource.getWatchedFilms().all())
+    }
+
+    override fun saveDBWatchedFilm(film: Film) {
+        localDataSource.getWatchedFilms().insert(convertFilmToWatchedEntity(film))
+    }
+
+    override fun getDBWillWatchFilms(): CategoryFilm {
+        return convertWillWatchEntityToCategoryFilm(localDataSource.getWillWatchFilms().all())
+    }
+
+    override fun saveDBWillWatchFilm(film: Film) {
+        localDataSource.getWillWatchFilms().insert(convertFilmToWillWatchEntity(film))
+    }
+
+    override fun getPopularFilms(): CategoryFilm {
+        return convertPopularEntityToCategoryFilm(localDataSource.getPopularFilms().all())
+    }
+
+    override fun savePopularFilms(films: List<Film>) {
+        localDataSource.getPopularFilms().insert(convertFilmsToPopularEntity(films))
     }
 }
