@@ -7,16 +7,17 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.goodevening.R
+import com.example.goodevening.domainmodel.CategoryFilm
 import com.example.goodevening.domainmodel.Film
 
-class FilmParentAdapter(onItemViewClickListener: OnItemViewClickListener?) : RecyclerView.Adapter<FilmParentAdapter.ParentViewHolder>() {
+class FilmParentAdapter(onItemViewClickListener: OnItemViewClickListener?) :
+    RecyclerView.Adapter<FilmParentAdapter.ParentViewHolder>() {
 
-    private var childAdapter : FilmAdapter = FilmAdapter(onItemViewClickListener)
+    private var childAdapter: FilmAdapter = FilmAdapter(onItemViewClickListener)
+    private lateinit var filmData: List<CategoryFilm>
 
-    private var films : List<Film>  = listOf()
-
-    fun setData(data: List<Film>) {
-        films = data
+    fun setData(data: List<CategoryFilm>) {
+        filmData = data
         notifyDataSetChanged()
     }
 
@@ -24,28 +25,38 @@ class FilmParentAdapter(onItemViewClickListener: OnItemViewClickListener?) : Rec
         childAdapter.removeListener()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmParentAdapter.ParentViewHolder {
-        return ParentViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.parent_item_view, parent, false) as View)
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): FilmParentAdapter.ParentViewHolder {
+        return ParentViewHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.parent_item_view, parent, false) as View
+        )
     }
 
     inner class ParentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private var categoryTextView : TextView = itemView.findViewById(R.id.test)
-        private var childRecyclerView : RecyclerView = itemView.findViewById(R.id.RecyclerViewFilm)
+        private lateinit var childRecyclerView: RecyclerView
 
-        fun bind(films : List<Film>, position: Int) {
-            categoryTextView.text = "category $position"
-            childRecyclerView = itemView.findViewById(R.id.RecyclerViewFilm)
-            childRecyclerView.layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
-            childRecyclerView.adapter = childAdapter
-            childRecyclerView.hasFixedSize()
-            childAdapter.setFilm(films)
+        fun init(filmCategory: CategoryFilm) {
+            with(itemView) {
+                findViewById<TextView>(R.id.test).text = filmCategory.category
+                childRecyclerView = findViewById(R.id.RecyclerViewFilm)
+            }
+            with(childRecyclerView) {
+                layoutManager =
+                    LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
+                adapter = childAdapter
+                hasFixedSize()
+                childAdapter.setFilm(filmCategory.films)
+            }
         }
     }
 
     override fun onBindViewHolder(holder: FilmParentAdapter.ParentViewHolder, position: Int) {
-        holder.bind(films, position)
+        holder.init(filmData[position])
     }
 
-    override fun getItemCount() = 10
+    override fun getItemCount() = filmData.size
 
 }
