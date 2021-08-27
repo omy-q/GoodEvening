@@ -27,7 +27,7 @@ class FacadeImpl(private val remoteDataSource: RemoteDataSource,
         return convertFavoriteEntityToCategoryFilm(localDataSource.getFavoriteFilms().all())
     }
 
-    override fun saveDBFavoriteFilm(film: Film) {
+    override fun saveFavoriteFilm(film: Film) {
         localDataSource.getFavoriteFilms().insert(convertFilmToFavoriteEntity(film))
     }
 
@@ -35,7 +35,7 @@ class FacadeImpl(private val remoteDataSource: RemoteDataSource,
         return convertWatchedEntityToCategoryFilm(localDataSource.getWatchedFilms().all())
     }
 
-    override fun saveDBWatchedFilm(film: Film) {
+    override fun saveWatchedFilm(film: Film) {
         localDataSource.getWatchedFilms().insert(convertFilmToWatchedEntity(film))
     }
 
@@ -43,11 +43,11 @@ class FacadeImpl(private val remoteDataSource: RemoteDataSource,
         return convertWillWatchEntityToCategoryFilm(localDataSource.getWillWatchFilms().all())
     }
 
-    override fun saveDBWillWatchFilm(film: Film) {
+    override fun saveWillWatchFilm(film: Film) {
         localDataSource.getWillWatchFilms().insert(convertFilmToWillWatchEntity(film))
     }
 
-    override fun getPopularFilms(): CategoryFilm {
+    override fun getDBPopularFilms(): CategoryFilm {
         return convertPopularEntityToCategoryFilm(localDataSource.getPopularFilms().all())
     }
 

@@ -14,17 +14,17 @@ interface Facade {
 
     fun getDBFavoriteFilms() : CategoryFilm
 
-    fun saveDBFavoriteFilm(film: Film)
+    fun saveFavoriteFilm(film: Film)
 
     fun getDBWatchedFilms() : CategoryFilm
 
-    fun saveDBWatchedFilm(film: Film)
+    fun saveWatchedFilm(film: Film)
 
     fun getDBWillWatchFilms() : CategoryFilm
 
-    fun saveDBWillWatchFilm(film: Film)
+    fun saveWillWatchFilm(film: Film)
 
-    fun getPopularFilms() : CategoryFilm
+    fun getDBPopularFilms() : CategoryFilm
 
     fun savePopularFilms(films : List<Film>)
 

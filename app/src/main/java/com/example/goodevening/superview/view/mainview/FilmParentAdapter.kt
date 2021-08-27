@@ -16,7 +16,7 @@ class FilmParentAdapter(private val onItemViewClickListener: OnItemViewClickList
     private lateinit var filmData: List<CategoryFilm>
 
     fun setData(data: List<CategoryFilm>) {
-        childAdapters = mutableListOf(FilmAdapter(onItemViewClickListener), FilmAdapter(onItemViewClickListener))
+        childAdapters = MutableList(data.size) { FilmAdapter(onItemViewClickListener) }
         filmData = data
         notifyDataSetChanged()
     }

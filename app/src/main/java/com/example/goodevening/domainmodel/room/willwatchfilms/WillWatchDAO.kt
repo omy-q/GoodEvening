@@ -1,10 +1,11 @@
 package com.example.goodevening.domainmodel.room.willwatchfilms
 
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.goodevening.domainmodel.room.willwatchfilms.WillWatchEntity
 
+@Dao
 interface WillWatchDAO {
     @Query("SELECT * FROM WillWatchEntity")
     fun all(): List<WillWatchEntity>

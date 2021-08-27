@@ -11,8 +11,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 
-fun convertDTOtoModel(filmsDTO: FilmDTO): CategoryFilm {
-    val category = "popular"
+fun convertDTOtoModel(filmsDTO: FilmDTO): List<Film> {
     val films : MutableList<Film> = mutableListOf()
     val genresValue : MutableList<String> = mutableListOf()
     for (filmDTO in filmsDTO.results){
@@ -26,7 +25,7 @@ fun convertDTOtoModel(filmsDTO: FilmDTO): CategoryFilm {
             filmDTO.overview,
             filmDTO.vote_average, genresValue.toList(), BASE_URL_IMAGE + filmDTO.poster_path))
     }
-    return CategoryFilm(category, films.toList())
+    return films.toList()
 }
 
 fun convertRecentEntityToCategoryFilm(entityList: List<RecentEntity>): CategoryFilm {
