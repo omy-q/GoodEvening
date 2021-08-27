@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import coil.api.load
 import com.example.goodevening.R
 import com.example.goodevening.domainmodel.Film
 import com.squareup.picasso.Picasso
@@ -28,10 +29,11 @@ class FilmAdapter(private var onItemViewClickListener: OnItemViewClickListener?)
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun init(film: Film) {
             with(itemView) {
-                Picasso
-                    .get()
-                    .load(film.poster)
-                    .into(findViewById<ImageView>(R.id.film_poster_card_view))
+//                Picasso
+//                    .get()
+//                    .load(film.poster)
+//                    .into(findViewById<ImageView>(R.id.film_poster_card_view))
+                findViewById<ImageView>(R.id.film_poster_card_view).load(film.poster)
                 findViewById<TextView>(R.id.film_name_card_view).text = film.name
                 findViewById<TextView>(R.id.film_year_card_view).text = film.year
                 findViewById<TextView>(R.id.film_country_card_view).text = "US"

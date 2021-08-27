@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import coil.api.load
 import com.example.goodevening.databinding.FilmFragmentBinding
 import com.example.goodevening.domainmodel.Film
 import com.example.goodevening.superview.viewmodel.DetailsViewModel
@@ -79,10 +80,11 @@ class FilmFragment : Fragment() {
             filmTime.text = "2.15"
             filmYear.text = film.year
             filmCountry.text = "US"
-            Picasso
-                .get()
-                .load(film.poster)
-                .into(filmDescription.poster)
+            filmDescription.poster.load(film.poster)
+//            Picasso
+//                .get()
+//                .load(film.poster)
+//                .into(filmDescription.poster)
             filmDescription.description.text = film.description
             filmDescription.RecyclerGenres.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             filmDescription.RecyclerGenres.adapter = genresAdapter

@@ -19,6 +19,7 @@ class RemoteDataSource {
         .build().create(FilmAPI::class.java)
 
     fun loadFilm(callback: Callback<FilmDTO>) {
-        filmApi.getFilm(BuildConfig.THE_MOVIEDB_API_KEY).enqueue(callback)
+//        filmApi.getFilm(BuildConfig.THE_MOVIEDB_API_KEY).enqueue(callback)
+        filmApi.getFilm(REQUEST_API_KEY_VALUE).enqueue(callback)
     }
 }
