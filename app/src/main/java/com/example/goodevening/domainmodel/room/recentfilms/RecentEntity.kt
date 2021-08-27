@@ -1,4 +1,4 @@
-package com.example.goodevening.domainmodel.room
+package com.example.goodevening.domainmodel.room.recentfilms
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
