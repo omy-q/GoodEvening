@@ -1,5 +1,7 @@
-package com.example.goodevening.domainmodel
+package com.example.goodevening.domainmodel.moviedb
 
+import com.example.goodevening.domainmodel.DATABASE_API_URL
+import com.example.goodevening.domainmodel.REQUEST_API_KEY_VALUE
 import com.google.gson.GsonBuilder
 import retrofit2.Callback
 import retrofit2.Retrofit

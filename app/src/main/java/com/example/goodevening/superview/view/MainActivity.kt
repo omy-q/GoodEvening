@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.goodevening.R
 import com.example.goodevening.databinding.ActivityMainBinding
+import com.example.goodevening.superview.view.mainview.MainFragment
 
 class MainActivity : AppCompatActivity() {
     lateinit var  binding : ActivityMainBinding

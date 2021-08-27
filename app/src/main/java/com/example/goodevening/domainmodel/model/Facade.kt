@@ -2,7 +2,7 @@ package com.example.goodevening.domainmodel.model
 
 import com.example.goodevening.domainmodel.CategoryFilm
 import com.example.goodevening.domainmodel.Film
-import com.example.goodevening.domainmodel.FilmDTO
+import com.example.goodevening.domainmodel.moviedb.FilmDTO
 
 interface Facade {
     fun getServerData(callback: retrofit2.Callback<FilmDTO>)

@@ -1,4 +1,4 @@
-package com.example.goodevening.superview.view
+package com.example.goodevening.superview.view.detailsview
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,12 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.goodevening.R
 import com.example.goodevening.databinding.FilmFragmentBinding
-import com.example.goodevening.databinding.MainFragmentBinding
 import com.example.goodevening.domainmodel.Film
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.film_description.view.*
 
 class FilmFragment : Fragment() {
 
@@ -36,7 +33,7 @@ class FilmFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arguments?.getParcelable<Film>(BUNDLE_EXTRA)?.let{film -> setData(film)}
+        arguments?.getParcelable<Film>(BUNDLE_EXTRA)?.let{ film -> setData(film)}
     }
 
     private fun setData(film : Film){

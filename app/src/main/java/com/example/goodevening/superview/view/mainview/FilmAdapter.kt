@@ -1,4 +1,4 @@
-package com.example.goodevening.superview.view
+package com.example.goodevening.superview.view.mainview
 
 import android.view.LayoutInflater
 import android.view.View
@@ -43,12 +43,12 @@ class FilmAdapter(private var onItemViewClickListener: OnItemViewClickListener?)
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.child_item_view, parent, false) as View
         )
     }
 
-    override fun onBindViewHolder(holder: FilmAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.init(films[position])
     }
 

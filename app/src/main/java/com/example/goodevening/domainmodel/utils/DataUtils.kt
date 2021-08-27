@@ -1,6 +1,7 @@
 package com.example.goodevening.domainmodel.utils
 
 import com.example.goodevening.domainmodel.*
+import com.example.goodevening.domainmodel.moviedb.FilmDTO
 import com.example.goodevening.room.RecentEntity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken

@@ -2,8 +2,8 @@ package com.example.goodevening.app
 
 import android.app.Application
 import androidx.room.Room
-import com.example.goodevening.room.RecentDAO
-import com.example.goodevening.room.RecentDataBase
+import com.example.goodevening.domainmodel.room.RecentDAO
+import com.example.goodevening.domainmodel.room.RecentDataBase
 
 class App : Application() {
 

@@ -1,4 +1,4 @@
-package com.example.goodevening.superview.view
+package com.example.goodevening.superview.view.mainview
 
 import android.os.Bundle
 import android.view.*
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.goodevening.R
 import com.example.goodevening.databinding.MainFragmentBinding
 import com.example.goodevening.domainmodel.Film
+import com.example.goodevening.superview.view.detailsview.FilmFragment
 import com.example.goodevening.superview.view.utils.showMessageByText
 import com.example.goodevening.superview.viewmodel.AppState
 import com.example.goodevening.superview.viewmodel.MainViewModel

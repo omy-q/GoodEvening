@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import com.example.goodevening.app.App.Companion.getFilmDao
 import com.example.goodevening.domainmodel.CategoryFilm
 import com.example.goodevening.domainmodel.Film
-import com.example.goodevening.domainmodel.FilmDTO
-import com.example.goodevening.domainmodel.RemoteDataSource
+import com.example.goodevening.domainmodel.moviedb.FilmDTO
+import com.example.goodevening.domainmodel.moviedb.RemoteDataSource
 import com.example.goodevening.domainmodel.model.Facade
 import com.example.goodevening.domainmodel.model.FacadeImpl
 import com.example.goodevening.domainmodel.utils.convertDTOtoModel

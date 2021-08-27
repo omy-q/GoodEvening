@@ -1,6 +1,8 @@
 package com.example.goodevening.domainmodel.model
 
 import com.example.goodevening.domainmodel.*
+import com.example.goodevening.domainmodel.moviedb.FilmDTO
+import com.example.goodevening.domainmodel.moviedb.RemoteDataSource
 import com.example.goodevening.domainmodel.utils.convertFilmToEntity
 import com.example.goodevening.domainmodel.utils.convertRecentEntityToCategoryFilm
 import com.example.goodevening.room.RecentDAO

@@ -8,4 +8,8 @@
     <string name="share">share</string>
     <string name="watch_later">watch later</string>
     <string name="test_type_film">default</string>
+    <string name="menu_title_adult">adult</string>
+    <string name="adult">adult</string>
+    <string name="child">child</string>
+    <string name="adult_or_child">18+</string>
 </resources>
