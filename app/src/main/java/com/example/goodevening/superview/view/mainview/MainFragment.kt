@@ -9,7 +9,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.goodevening.R
 import com.example.goodevening.databinding.MainFragmentBinding
+import com.example.goodevening.domainmodel.CategoryFilm
 import com.example.goodevening.domainmodel.Film
+import com.example.goodevening.superview.view.additionalview.CategoryFilmFragment
 import com.example.goodevening.superview.view.detailsview.FilmFragment
 import com.example.goodevening.superview.view.utils.showMessageByText
 import com.example.goodevening.superview.viewmodel.AppState
@@ -18,19 +20,33 @@ import com.google.android.material.snackbar.Snackbar
 
 class MainFragment : Fragment() {
     private val viewModel: MainViewModel by lazy { ViewModelProvider(this).get(MainViewModel::class.java) }
-    private val parentAdapter = FilmParentAdapter(object : OnItemViewClickListener {
+    private val parentAdapter = FilmParentAdapter(
+        object : OnItemViewClickListener {
         override fun onItemViewClick(film: Film) {
             viewModel.saveRecentFilmToDB(film)
             activity?.supportFragmentManager?.apply {
                 beginTransaction()
-                    .replace(R.id.fragment_container, FilmFragment.newInstance(Bundle().apply {
-                        putParcelable(FilmFragment.BUNDLE_EXTRA, film)
+                    .replace(R.id.fragment_container, FilmFragment
+                        .newInstance(Bundle().apply {
+                            putParcelable(FilmFragment.BUNDLE_EXTRA, film)
                     }))
                     .addToBackStack("")
                     .commitAllowingStateLoss()
             }
         }
-    })
+    }, object : OnMoreButtonClickListener{
+            override fun onMoreButtonClick(category: CategoryFilm) {
+                activity?.supportFragmentManager?.apply {
+                    beginTransaction()
+                        .replace(R.id.fragment_container, CategoryFilmFragment
+                            .newInstance(Bundle().apply {
+                                putParcelable(CategoryFilmFragment.BUNDLE_EXTRA, category)
+                            }))
+                        .addToBackStack("")
+                        .commitAllowingStateLoss()
+                }
+            }
+        })
 
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
