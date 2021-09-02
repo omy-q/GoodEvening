@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "155714074440",
+    "project_id": "good-evening-9b3c0",
+    "storage_bucket": "good-evening-9b3c0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:155714074440:android:64b2151d6c90480431257d",
+        "android_client_info": {
+          "package_name": "com.example.goodevening"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "155714074440-quo458coneml3heqft2c9cpng1nes2vp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDc6KHDDmIXu2dPiDWo4cfssPPmb4_JjRQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "155714074440-quo458coneml3heqft2c9cpng1nes2vp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
