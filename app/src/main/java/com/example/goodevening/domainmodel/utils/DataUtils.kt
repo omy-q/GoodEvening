@@ -9,6 +9,7 @@ import com.example.goodevening.domainmodel.room.watchedfilms.WatchedEntity
 import com.example.goodevening.domainmodel.room.willwatchfilms.WillWatchEntity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import java.util.*
 
 
 fun convertDTOtoModel(filmsDTO: FilmDTO): List<Film> {
@@ -27,7 +28,6 @@ fun convertDTOtoModel(filmsDTO: FilmDTO): List<Film> {
     }
     return films.toList()
 }
-
 fun convertRecentEntityToCategoryFilm(entityList: List<RecentEntity>): CategoryFilm {
     val category = "Recently viewed"
     val type = object : TypeToken<List<String>>() {}.type
@@ -38,12 +38,6 @@ fun convertRecentEntityToCategoryFilm(entityList: List<RecentEntity>): CategoryF
     }
     return CategoryFilm(category, films)
 }
-
-fun convertFilmToRecentEntity(film : Film): RecentEntity {
-    return RecentEntity(film.id, film.name, film.description, film.year,
-        film.average.toString(), film.poster, Gson().toJson(film.genres))
-}
-
 fun convertFavoriteEntityToCategoryFilm(entityList: List<FavoriteEntity>): CategoryFilm {
     val category = "Favorite films"
     val type = object : TypeToken<List<String>>() {}.type
@@ -54,12 +48,6 @@ fun convertFavoriteEntityToCategoryFilm(entityList: List<FavoriteEntity>): Categ
     }
     return CategoryFilm(category, films)
 }
-
-fun convertFilmToFavoriteEntity(film : Film): FavoriteEntity {
-    return FavoriteEntity(film.id, film.name, film.description, film.year,
-        film.average.toString(), film.poster, Gson().toJson(film.genres))
-}
-
 fun convertWatchedEntityToCategoryFilm(entityList: List<WatchedEntity>): CategoryFilm {
     val category = "Watched films"
     val type = object : TypeToken<List<String>>() {}.type
@@ -70,12 +58,6 @@ fun convertWatchedEntityToCategoryFilm(entityList: List<WatchedEntity>): Categor
     }
     return CategoryFilm(category, films)
 }
-
-fun convertFilmToWatchedEntity(film : Film): WatchedEntity {
-    return WatchedEntity(film.id, film.name, film.description, film.year,
-        film.average.toString(), film.poster, Gson().toJson(film.genres))
-}
-
 fun convertWillWatchEntityToCategoryFilm(entityList: List<WillWatchEntity>): CategoryFilm {
     val category = "Will watched films"
     val type = object : TypeToken<List<String>>() {}.type
@@ -86,12 +68,6 @@ fun convertWillWatchEntityToCategoryFilm(entityList: List<WillWatchEntity>): Cat
     }
     return CategoryFilm(category, films)
 }
-
-fun convertFilmToWillWatchEntity(film : Film): WillWatchEntity {
-    return WillWatchEntity(film.id, film.name, film.description, film.year,
-        film.average.toString(), film.poster, Gson().toJson(film.genres))
-}
-
 fun convertPopularEntityToCategoryFilm(entityList: List<PopularEntity>): CategoryFilm {
     val category = "Popular"
     val type = object : TypeToken<List<String>>() {}.type
@@ -103,12 +79,44 @@ fun convertPopularEntityToCategoryFilm(entityList: List<PopularEntity>): Categor
     return CategoryFilm(category, films)
 }
 
+fun convertFilmToRecentEntity(film : Film): RecentEntity {
+    val date: Date = Calendar.getInstance().time
+    return RecentEntity(film.id, date.time, film.name, film.description, film.year,
+        film.average.toString(), film.poster, Gson().toJson(film.genres))
+}
+fun convertFilmToFavoriteEntity(film : Film): FavoriteEntity {
+    val date: Date = Calendar.getInstance().time
+    return FavoriteEntity(film.id, date.time, film.name,  film.description, film.year,
+        film.average.toString(), film.poster, Gson().toJson(film.genres))
+}
+fun convertFilmToWatchedEntity(film : Film): WatchedEntity {
+    val date: Date = Calendar.getInstance().time
+    return WatchedEntity(film.id, date.time, film.name, film.description, film.year,
+        film.average.toString(), film.poster, Gson().toJson(film.genres))
+}
+fun convertFilmToWillWatchEntity(film : Film): WillWatchEntity {
+    val date: Date = Calendar.getInstance().time
+    return WillWatchEntity(film.id, date.time, film.name, film.description, film.year,
+        film.average.toString(), film.poster, Gson().toJson(film.genres))
+}
 fun convertFilmsToPopularEntity(films : List<Film>): List<PopularEntity> {
     val popularEntities : MutableList<PopularEntity> = mutableListOf()
+    val date: Date = Calendar.getInstance().time
     for (film in films){
-        popularEntities.add(PopularEntity(film.id, film.name, film.description, film.year,
+        popularEntities.add(PopularEntity(film.id, date.time, film.name, film.description, film.year,
             film.average.toString(), film.poster, Gson().toJson(film.genres)))
     }
     return popularEntities.toList()
 }
+
+
+
+
+
+
+
+
+
+
+
 
