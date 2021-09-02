@@ -2,10 +2,9 @@ package com.example.goodevening.superview.view
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.Service
+import android.app.PendingIntent
 import android.content.Intent
 import android.os.Build
-import android.os.IBinder
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
@@ -44,11 +43,21 @@ class PushMessagingService : FirebaseMessagingService() {
             setContentText(message)
             setSmallIcon(R.drawable.ic_push_message)
             priority = NotificationCompat.PRIORITY_DEFAULT
+            setContentIntent(getResultPendingIntent())
         }
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             createChannel(notificationManager)
         }
         notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())
+    }
+
+    private fun getResultPendingIntent(): PendingIntent {
+        val notifyIntent = Intent(applicationContext, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        return PendingIntent.getActivity(this, 0,
+            notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
+        )
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -65,4 +74,6 @@ class PushMessagingService : FirebaseMessagingService() {
     override fun onNewToken(token: String) {
         Log.d("token", "$token")
     }
+
+
 }
