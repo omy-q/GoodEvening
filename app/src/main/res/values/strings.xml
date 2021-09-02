@@ -12,4 +12,5 @@
     <string name="adult">adult</string>
     <string name="child">child</string>
     <string name="adult_or_child">18+</string>
+    <string name="see_more">more</string>
 </resources>
