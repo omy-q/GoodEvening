@@ -14,44 +14,68 @@ class FacadeImpl(private val remoteDataSource: RemoteDataSource,
         remoteDataSource.loadFilm(callback)
     }
 
-    override fun getDBRecentFilms(): CategoryFilm {
-        return convertRecentEntityToCategoryFilm(localDataSource.getRecentFilms().all())
+    override fun getDBRecentFilms(callbackDB: CallbackDB) {
+        Thread {
+            val data = convertRecentEntityToCategoryFilm(localDataSource.getRecentFilms().all())
+            callbackDB.onResponse(data)
+        }.start()
     }
 
-    override fun saveRecentFilm(film: Film) {
-        localDataSource.getRecentFilms().insert(convertFilmToRecentEntity(film))
-
+    override fun getDBFavoriteFilms(callbackDB: CallbackDB) {
+        Thread {
+            val data = convertFavoriteEntityToCategoryFilm(localDataSource.getFavoriteFilms().all())
+            callbackDB.onResponse(data)
+        }.start()
     }
 
-    override fun getDBFavoriteFilms(): CategoryFilm {
-        return convertFavoriteEntityToCategoryFilm(localDataSource.getFavoriteFilms().all())
+    override fun getDBWatchedFilms(callbackDB: CallbackDB) {
+        Thread {
+            val data = convertWatchedEntityToCategoryFilm(localDataSource.getWatchedFilms().all())
+            callbackDB.onResponse(data)
+        }.start()
     }
 
-    override fun saveFavoriteFilm(film: Film) {
-        localDataSource.getFavoriteFilms().insert(convertFilmToFavoriteEntity(film))
+    override fun getDBWillWatchFilms(callbackDB: CallbackDB) {
+        Thread {
+            val data = convertWillWatchEntityToCategoryFilm(localDataSource.getWillWatchFilms().all())
+            callbackDB.onResponse(data)
+        }.start()
     }
 
-    override fun getDBWatchedFilms(): CategoryFilm {
-        return convertWatchedEntityToCategoryFilm(localDataSource.getWatchedFilms().all())
-    }
-
-    override fun saveWatchedFilm(film: Film) {
-        localDataSource.getWatchedFilms().insert(convertFilmToWatchedEntity(film))
-    }
-
-    override fun getDBWillWatchFilms(): CategoryFilm {
-        return convertWillWatchEntityToCategoryFilm(localDataSource.getWillWatchFilms().all())
-    }
-
-    override fun saveWillWatchFilm(film: Film) {
-        localDataSource.getWillWatchFilms().insert(convertFilmToWillWatchEntity(film))
-    }
-
-    override fun getDBPopularFilms(): CategoryFilm {
-        return convertPopularEntityToCategoryFilm(localDataSource.getPopularFilms().all())
+    override fun getDBPopularFilms(callbackDB: CallbackDB) {
+        Thread {
+            val data = convertPopularEntityToCategoryFilm(localDataSource.getPopularFilms().all())
+            callbackDB.onResponse(data)
+        }.start()
     }
 
     override fun savePopularFilms(films: List<Film>) {
-        localDataSource.getPopularFilms().insert(convertFilmsToPopularEntity(films))
+        Thread {
+            localDataSource.getPopularFilms().insert(convertFilmsToPopularEntity(films))
+        }.start()
+    }
+
+    override fun saveWatchedFilm(film: Film) {
+        Thread {
+            localDataSource.getWatchedFilms().insert(convertFilmToWatchedEntity(film))
+        }.start()
+    }
+
+    override fun saveRecentFilm(film: Film) {
+        Thread {
+            localDataSource.getRecentFilms().insert(convertFilmToRecentEntity(film))
+        }.start()
+    }
+
+    override fun saveFavoriteFilm(film: Film) {
+        Thread {
+            localDataSource.getFavoriteFilms().insert(convertFilmToFavoriteEntity(film))
+        }.start()
+    }
+
+    override fun saveWillWatchFilm(film: Film) {
+        Thread {
+            localDataSource.getWillWatchFilms().insert(convertFilmToWillWatchEntity(film))
+        }.start()
     }
 }
