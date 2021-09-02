@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         FirebaseInstanceId.getInstance().instanceId
             .addOnCompleteListener(OnCompleteListener<InstanceIdResult> { task ->
                 if(!task.isSuccessful){
-                    Log.d("token", task.exception.toString())
+                    Log.d("mylogs", task.exception.toString())
                     return@OnCompleteListener
                 } else{
                     val token : String = task.result!!.token

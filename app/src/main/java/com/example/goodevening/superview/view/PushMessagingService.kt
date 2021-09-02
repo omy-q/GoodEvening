@@ -72,7 +72,7 @@ class PushMessagingService : FirebaseMessagingService() {
     }
 
     override fun onNewToken(token: String) {
-        Log.d("token", "$token")
+        Log.d("mylogs", "$token")
     }
 
 
