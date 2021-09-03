@@ -15,13 +15,13 @@ class FacadeImpl(private val remoteDataSource: RemoteDataSource,
 ) : Facade {
 
     private val handlerMain = Handler(Looper.getMainLooper())
-    private val threadDB = HandlerThread("DBThread")
-    private val handlerDB : Handler
+//    private val threadDB = HandlerThread("DBThread")
+//    private val handlerDB : Handler
 
-    init{
-        threadDB.start()
-        handlerDB = Handler(threadDB.looper)
-    }
+//    init{
+//        threadDB.start()
+//        handlerDB = Handler(threadDB.looper)
+//    }
 
     override fun getServerData(callback: retrofit2.Callback<FilmDTO>){
         remoteDataSource.loadPopularFilm(callback)
@@ -43,67 +43,88 @@ class FacadeImpl(private val remoteDataSource: RemoteDataSource,
     }
 
     override fun getDBRecentFilms(callbackDB: CallbackDB) {
-        handlerDB.post{
-            val data = convertRecentEntityToCategoryFilm(localDataSource.getRecentFilms().allOrderByDate())
-            handlerMain.post {callbackDB.onResponse(data)}
-        }
+//        handlerDB.post{
+        Thread {
+            val data =
+                convertRecentEntityToCategoryFilm(localDataSource.getRecentFilms().allOrderByDate())
+            handlerMain.post { callbackDB.onResponse(data) }
+        }.start()
+//        }
     }
 
     override fun getDBFavoriteFilms(callbackDB: CallbackDB) {
-        handlerDB.post{
+//        handlerDB.post{
+        Thread {
             val data = convertFavoriteEntityToCategoryFilm(localDataSource.getFavoriteFilms().allOrderByDate())
             handlerMain.post {callbackDB.onResponse(data)}
-        }
+        }.start()
+//        }
     }
 
     override fun getDBWatchedFilms(callbackDB: CallbackDB) {
-        handlerDB.post {
+//        handlerDB.post {
+        Thread {
             val data = convertWatchedEntityToCategoryFilm(localDataSource.getWatchedFilms().allOderByDate())
             handlerMain.post {callbackDB.onResponse(data)}
-        }
+        }.start()
+//        }
     }
 
     override fun getDBWillWatchFilms(callbackDB: CallbackDB) {
-        handlerDB.post {
+//        handlerDB.post {
+        Thread {
             val data = convertWillWatchEntityToCategoryFilm(localDataSource.getWillWatchFilms().allOrderByDate())
             handlerMain.post {callbackDB.onResponse(data)}
-        }
+        }.start()
+//        }
     }
 
     override fun getDBPopularFilms(callbackDB: CallbackDB) {
-        handlerDB.post {
+//        handlerDB.post {
+        Thread {
             val data = convertPopularEntityToCategoryFilm(localDataSource.getPopularFilms().allOrderByDate())
             handlerMain.post {callbackDB.onResponse(data)}
-        }
+        }.start()
+//        }
     }
 
     override fun savePopularFilms(films: List<Film>) {
-        handlerDB.post{
+//        handlerDB.post{
+        Thread {
             localDataSource.getPopularFilms().insert(convertFilmsToPopularEntity(films))
-        }
+        }.start()
+//        }
     }
 
     override fun saveWatchedFilm(film: Film) {
-        handlerDB.post{
+//        handlerDB.post{
+        Thread {
             localDataSource.getWatchedFilms().insert(convertFilmToWatchedEntity(film))
-        }
+        }.start()
+//        }
     }
 
     override fun saveRecentFilm(film: Film) {
-        handlerDB.post {
+//        handlerDB.post {
+        Thread {
             localDataSource.getRecentFilms().insert(convertFilmToRecentEntity(film))
-        }
+        }.start()
+//        }
     }
 
     override fun saveFavoriteFilm(film: Film) {
-        handlerDB.post {
+//        handlerDB.post {
+        Thread {
             localDataSource.getFavoriteFilms().insert(convertFilmToFavoriteEntity(film))
-        }
+        }.start()
+//        }
     }
 
     override fun saveWillWatchFilm(film: Film) {
-        handlerDB.post {
+//        handlerDB.post {
+        Thread {
             localDataSource.getWillWatchFilms().insert(convertFilmToWillWatchEntity(film))
-        }
+        }.start()
+//        }
     }
 }
