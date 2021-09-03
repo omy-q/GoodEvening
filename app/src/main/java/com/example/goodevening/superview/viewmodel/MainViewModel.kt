@@ -93,7 +93,7 @@ class MainViewModel(
         getDataFromServer()
         getRecentData()
         getFavoriteData()
-//        getPopularData()
+        getPopularData()
         getWatchedData()
         getWillWatchData()
     }
