@@ -1,4 +1,4 @@
-package com.example.goodevening.superview.view
+package com.example.goodevening.superview.view.mainview
 
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +16,7 @@ class FilmParentAdapter(private val onItemViewClickListener: OnItemViewClickList
     private lateinit var filmData: List<CategoryFilm>
 
     fun setData(data: List<CategoryFilm>) {
-        childAdapters = mutableListOf(FilmAdapter(onItemViewClickListener), FilmAdapter(onItemViewClickListener))
+        childAdapters = MutableList(data.size) { FilmAdapter(onItemViewClickListener) }
         filmData = data
         notifyDataSetChanged()
     }
@@ -30,7 +30,7 @@ class FilmParentAdapter(private val onItemViewClickListener: OnItemViewClickList
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): FilmParentAdapter.ParentViewHolder {
+    ): ParentViewHolder {
         return ParentViewHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.parent_item_view, parent, false) as View
@@ -55,7 +55,7 @@ class FilmParentAdapter(private val onItemViewClickListener: OnItemViewClickList
         }
     }
 
-    override fun onBindViewHolder(holder: FilmParentAdapter.ParentViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ParentViewHolder, position: Int) {
         holder.init(filmData[position], position)
     }
 

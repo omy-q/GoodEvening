@@ -1,6 +1,4 @@
-package com.example.goodevening.domainmodel
-
-import android.os.Parcelable
+package com.example.goodevening.domainmodel.moviedb
 
 data class FilmDTO(val results: List<ResultDTO>) {
 }

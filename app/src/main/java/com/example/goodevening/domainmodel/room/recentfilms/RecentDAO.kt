@@ -1,4 +1,5 @@
-package com.example.goodevening.room
+package com.example.goodevening.domainmodel.room.recentfilms
+
 import androidx.room.*
 
 @Dao

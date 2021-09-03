@@ -2,13 +2,14 @@ package com.example.goodevening.superview.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.goodevening.app.App.Companion.getFilmDao
+import com.example.goodevening.app.App.Companion.getDB
 import com.example.goodevening.domainmodel.CategoryFilm
 import com.example.goodevening.domainmodel.Film
-import com.example.goodevening.domainmodel.FilmDTO
-import com.example.goodevening.domainmodel.RemoteDataSource
+import com.example.goodevening.domainmodel.moviedb.FilmDTO
+import com.example.goodevening.domainmodel.moviedb.RemoteDataSource
 import com.example.goodevening.domainmodel.model.Facade
 import com.example.goodevening.domainmodel.model.FacadeImpl
+import com.example.goodevening.domainmodel.room.facade.RoomFacadeImpl
 import com.example.goodevening.domainmodel.utils.convertDTOtoModel
 import retrofit2.Response
 import retrofit2.Callback
@@ -21,7 +22,7 @@ private const val REQUEST_ERROR = "Ошибка запроса на сервер
 
 class MainViewModel(
     private val liveDataObserver: MutableLiveData<AppState> = MutableLiveData(),
-    private val facade: Facade = FacadeImpl(RemoteDataSource(), getFilmDao())
+    private val facade: Facade = FacadeImpl(RemoteDataSource(), RoomFacadeImpl(getDB()))
 ) : ViewModel() {
 
     private var categoriesList : MutableList<CategoryFilm> = mutableListOf()
@@ -29,14 +30,6 @@ class MainViewModel(
     fun getLiveData() = liveDataObserver
 
     fun getFilm() = getData()
-
-    private fun getDataFromLocalSource() {
-        Thread {
-            liveDataObserver.postValue(AppState.Loading)
-            sleep(2000)
-            liveDataObserver.postValue(AppState.Success(facade.getLocalData()))
-        }.start()
-    }
 
     private val callBack = object : Callback<FilmDTO> {
 
@@ -54,8 +47,11 @@ class MainViewModel(
         }
 
         private fun checkResponse(serverResponse: FilmDTO) {
-            categoriesList.add(convertDTOtoModel(serverResponse))
-            liveDataObserver.postValue(AppState.Success(categoriesList))
+            facade.savePopularFilms(convertDTOtoModel(serverResponse))
+//            getPopularData()
+//            categoriesList.add(convertDTOtoModel(serverResponse))
+//            liveDataObserver.postValue(AppState.Success(categoriesList))
+
         }
     }
 
@@ -64,8 +60,36 @@ class MainViewModel(
     }
 
     private fun getRecentData(){
-        if (facade.getDBRecentData().films.isNotEmpty()){
-            categoriesList.add(facade.getDBRecentData())
+        if (facade.getDBRecentFilms().films.isNotEmpty()){
+            categoriesList.add(facade.getDBRecentFilms())
+            liveDataObserver.postValue(AppState.Success(categoriesList))
+        }
+    }
+
+    private fun getFavoriteData(){
+        if (facade.getDBFavoriteFilms().films.isNotEmpty()){
+            categoriesList.add(facade.getDBFavoriteFilms())
+            liveDataObserver.postValue(AppState.Success(categoriesList))
+        }
+    }
+
+    private fun getWatchedData(){
+        if (facade.getDBWatchedFilms().films.isNotEmpty()){
+            categoriesList.add(facade.getDBWatchedFilms())
+            liveDataObserver.postValue(AppState.Success(categoriesList))
+        }
+    }
+
+    private fun getWillWatchData(){
+        if (facade.getDBWillWatchFilms().films.isNotEmpty()){
+            categoriesList.add(facade.getDBWillWatchFilms())
+            liveDataObserver.postValue(AppState.Success(categoriesList))
+        }
+    }
+
+    private fun getPopularData(){
+        if (facade.getDBPopularFilms().films.isNotEmpty()){
+            categoriesList.add(facade.getDBPopularFilms())
             liveDataObserver.postValue(AppState.Success(categoriesList))
         }
     }
@@ -75,9 +99,31 @@ class MainViewModel(
         liveDataObserver.postValue(AppState.Loading)
         getDataFromServer()
         getRecentData()
+        getFavoriteData()
+        getPopularData()
+        getWatchedData()
+        getWillWatchData()
     }
 
     fun saveRecentFilmToDB(film : Film) {
         facade.saveRecentFilm(film)
     }
+
+    fun saveFavoriteFilmToDB(film : Film) {
+        facade.saveFavoriteFilm(film)
+    }
+
+    fun saveWatchedFilmToDB(film : Film) {
+        facade.saveWatchedFilm(film)
+    }
+
+    fun saveWillWatchedFilmToDB(film : Film) {
+        facade.saveWillWatchFilm(film)
+    }
+
+//    fun savePopularFilmToDB(films: List<Film>) {
+//        facade.savePopularFilms(films)
+//    }
+
+
 }

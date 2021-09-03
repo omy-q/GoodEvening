@@ -1,15 +1,11 @@
-package com.example.goodevening.superview.view
+package com.example.goodevening.superview.view.detailsview
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.goodevening.R
-import com.example.goodevening.domainmodel.Film
-import com.squareup.picasso.Picasso
 
 class GenresAdapter : RecyclerView.Adapter<GenresAdapter.GenreViewHolder>() {
 
@@ -28,14 +24,14 @@ class GenresAdapter : RecyclerView.Adapter<GenresAdapter.GenreViewHolder>() {
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenresAdapter.GenreViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenreViewHolder {
         return GenreViewHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.genre_item_view, parent, false) as View
         )
     }
 
-    override fun onBindViewHolder(holder: GenresAdapter.GenreViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: GenreViewHolder, position: Int) {
         holder.init(genres[position])
     }
 

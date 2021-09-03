@@ -1,4 +1,4 @@
-package com.example.goodevening.superview.view
+package com.example.goodevening.superview.view.mainview
 
 import com.example.goodevening.domainmodel.Film
 
