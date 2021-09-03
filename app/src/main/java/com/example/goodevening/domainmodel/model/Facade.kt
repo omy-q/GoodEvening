@@ -6,6 +6,8 @@ import com.example.goodevening.domainmodel.moviedb.FilmDTO
 interface Facade {
     fun getServerData(callback: retrofit2.Callback<FilmDTO>)
     // получение данных с сервера
+    fun getLocalData(callback: CallbackDB)
+    // получение данных из локальной бд
 
     fun getDBRecentFilms(callbackDB: CallbackDB)
     fun getDBFavoriteFilms(callbackDB: CallbackDB)

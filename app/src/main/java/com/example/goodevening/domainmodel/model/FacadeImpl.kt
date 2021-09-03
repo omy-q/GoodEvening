@@ -34,6 +34,14 @@ class FacadeImpl(private val remoteDataSource: RemoteDataSource,
         remoteDataSource.loadWarFilm(callback)
     }
 
+    override fun getLocalData(callback: CallbackDB) {
+        getDBRecentFilms(callback)
+        getDBFavoriteFilms(callback)
+        getDBWatchedFilms(callback)
+        getDBWillWatchFilms(callback)
+
+    }
+
     override fun getDBRecentFilms(callbackDB: CallbackDB) {
         handlerDB.post{
             val data = convertRecentEntityToCategoryFilm(localDataSource.getRecentFilms().allOrderByDate())
