@@ -1,81 +1,94 @@
 package com.example.goodevening.domainmodel.model
 
+import android.os.Handler
+import android.os.HandlerThread
+import android.os.Looper
 import com.example.goodevening.domainmodel.*
 import com.example.goodevening.domainmodel.moviedb.FilmDTO
 import com.example.goodevening.domainmodel.moviedb.RemoteDataSource
 import com.example.goodevening.domainmodel.room.facade.RoomFacade
 import com.example.goodevening.domainmodel.utils.*
 
+
 class FacadeImpl(private val remoteDataSource: RemoteDataSource,
                  private val localDataSource: RoomFacade
 ) : Facade {
+
+    private val handlerMain = Handler(Looper.getMainLooper())
+    private val threadDB = HandlerThread("DBThread")
+    private val handlerDB : Handler
+
+    init{
+        threadDB.start()
+        handlerDB = Handler(threadDB.looper)
+    }
 
     override fun getServerData(callback: retrofit2.Callback<FilmDTO>){
         remoteDataSource.loadFilm(callback)
     }
 
     override fun getDBRecentFilms(callbackDB: CallbackDB) {
-        Thread {
-            val data = convertRecentEntityToCategoryFilm(localDataSource.getRecentFilms().all())
-            callbackDB.onResponse(data)
-        }.start()
+        handlerDB.post{
+            val data = convertRecentEntityToCategoryFilm(localDataSource.getRecentFilms().allOrderByDate())
+            handlerMain.post {callbackDB.onResponse(data)}
+        }
     }
 
     override fun getDBFavoriteFilms(callbackDB: CallbackDB) {
-        Thread {
-            val data = convertFavoriteEntityToCategoryFilm(localDataSource.getFavoriteFilms().all())
-            callbackDB.onResponse(data)
-        }.start()
+        handlerDB.post{
+            val data = convertFavoriteEntityToCategoryFilm(localDataSource.getFavoriteFilms().allOrderByDate())
+            handlerMain.post {callbackDB.onResponse(data)}
+        }
     }
 
     override fun getDBWatchedFilms(callbackDB: CallbackDB) {
-        Thread {
-            val data = convertWatchedEntityToCategoryFilm(localDataSource.getWatchedFilms().all())
-            callbackDB.onResponse(data)
-        }.start()
+        handlerDB.post {
+            val data = convertWatchedEntityToCategoryFilm(localDataSource.getWatchedFilms().allOderByDate())
+            handlerMain.post {callbackDB.onResponse(data)}
+        }
     }
 
     override fun getDBWillWatchFilms(callbackDB: CallbackDB) {
-        Thread {
-            val data = convertWillWatchEntityToCategoryFilm(localDataSource.getWillWatchFilms().all())
-            callbackDB.onResponse(data)
-        }.start()
+        handlerDB.post {
+            val data = convertWillWatchEntityToCategoryFilm(localDataSource.getWillWatchFilms().allOrderByDate())
+            handlerMain.post {callbackDB.onResponse(data)}
+        }
     }
 
     override fun getDBPopularFilms(callbackDB: CallbackDB) {
-        Thread {
-            val data = convertPopularEntityToCategoryFilm(localDataSource.getPopularFilms().all())
-            callbackDB.onResponse(data)
-        }.start()
+        handlerDB.post {
+            val data = convertPopularEntityToCategoryFilm(localDataSource.getPopularFilms().allOrderByDate())
+            handlerMain.post {callbackDB.onResponse(data)}
+        }
     }
 
     override fun savePopularFilms(films: List<Film>) {
-        Thread {
+        handlerDB.post{
             localDataSource.getPopularFilms().insert(convertFilmsToPopularEntity(films))
-        }.start()
+        }
     }
 
     override fun saveWatchedFilm(film: Film) {
-        Thread {
+        handlerDB.post{
             localDataSource.getWatchedFilms().insert(convertFilmToWatchedEntity(film))
-        }.start()
+        }
     }
 
     override fun saveRecentFilm(film: Film) {
-        Thread {
+        handlerDB.post {
             localDataSource.getRecentFilms().insert(convertFilmToRecentEntity(film))
-        }.start()
+        }
     }
 
     override fun saveFavoriteFilm(film: Film) {
-        Thread {
+        handlerDB.post {
             localDataSource.getFavoriteFilms().insert(convertFilmToFavoriteEntity(film))
-        }.start()
+        }
     }
 
     override fun saveWillWatchFilm(film: Film) {
-        Thread {
+        handlerDB.post {
             localDataSource.getWillWatchFilms().insert(convertFilmToWillWatchEntity(film))
-        }.start()
+        }
     }
 }

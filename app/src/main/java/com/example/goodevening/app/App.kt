@@ -31,7 +31,6 @@ class App : Application() {
                             appInstance!!.applicationContext,
                             DataBase::class.java,
                             DB_NAME)
-                            .allowMainThreadQueries()
                             .build()
                     }
                 }
