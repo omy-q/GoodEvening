@@ -24,7 +24,14 @@ class FacadeImpl(private val remoteDataSource: RemoteDataSource,
     }
 
     override fun getServerData(callback: retrofit2.Callback<FilmDTO>){
-        remoteDataSource.loadFilm(callback)
+        remoteDataSource.loadPopularFilm(callback)
+        remoteDataSource.loadComedyFilm(callback)
+        remoteDataSource.loadDramaFilm(callback)
+        remoteDataSource.loadThrillerFilm(callback)
+        remoteDataSource.loadFantasyFilm(callback)
+        remoteDataSource.loadFamilyFilm(callback)
+        remoteDataSource.loadHorrorFilm(callback)
+        remoteDataSource.loadWarFilm(callback)
     }
 
     override fun getDBRecentFilms(callbackDB: CallbackDB) {
