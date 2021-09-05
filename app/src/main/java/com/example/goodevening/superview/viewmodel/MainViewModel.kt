@@ -1,10 +1,12 @@
 package com.example.goodevening.superview.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.goodevening.app.App.Companion.getDB
 import com.example.goodevening.domainmodel.CategoryFilm
 import com.example.goodevening.domainmodel.Film
+import com.example.goodevening.domainmodel.genres
 import com.example.goodevening.domainmodel.model.CallbackDB
 import com.example.goodevening.domainmodel.moviedb.FilmDTO
 import com.example.goodevening.domainmodel.moviedb.RemoteDataSource
@@ -27,6 +29,8 @@ class MainViewModel(
 ) : ViewModel() {
 
     private var categoriesList : MutableList<CategoryFilm> = mutableListOf()
+    private val GENRES = "with_genres"
+    private val POPULAR = "Popular"
 
     fun getLiveData() = liveDataObserver
 
@@ -48,7 +52,8 @@ class MainViewModel(
         override fun onResponse(call: Call<FilmDTO>, response: Response<FilmDTO>) {
             val serverResponse: FilmDTO? = response.body()
             if (response.isSuccessful && serverResponse != null) {
-                categoriesList.add(convertDTOtoModel(serverResponse))
+                val category = getCategory(response)
+                categoriesList.add(convertDTOtoModel(category, serverResponse))
                 liveDataObserver.postValue(AppState.Success(categoriesList))
             } else {
                 liveDataObserver.postValue(AppState.Error(Throwable(SERVER_ERROR)))
@@ -56,6 +61,12 @@ class MainViewModel(
         }
         override fun onFailure(call: Call<FilmDTO>, t: Throwable) {
             liveDataObserver.postValue(AppState.Error(Throwable(t.message ?: REQUEST_ERROR)))
+        }
+
+        private fun getCategory(response: Response<FilmDTO>) : String{
+            return if (response.raw().request().url().queryParameterValues(GENRES).size > 0) {
+                genres[Integer.parseInt(response.raw().request().url().queryParameterValues(GENRES)[0])]?:"Default"
+            } else POPULAR
         }
     }
 
