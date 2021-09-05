@@ -37,7 +37,6 @@ class MainViewModel(
         liveDataObserver.postValue(AppState.Loading)
         getDataFromRemoteSource()
         getDataFromLocalSource()
-        liveDataObserver.postValue(AppState.Success(categoriesList))
     }
 
     private fun getDataFromRemoteSource() {
