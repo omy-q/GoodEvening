@@ -32,30 +32,36 @@ class MainViewModel(
 
     fun getFilm() = getData()
 
-    private val callBack = object : Callback<FilmDTO> {
+    private fun getData(){
+        categoriesList.clear()
+        liveDataObserver.postValue(AppState.Loading)
+        getDataFromRemoteSource()
+        getDataFromLocalSource()
+        liveDataObserver.postValue(AppState.Success(categoriesList))
+    }
+
+    private fun getDataFromRemoteSource() {
+        facade.getServerData(callbackAPI)
+    }
+
+    private val callbackAPI = object : Callback<FilmDTO> {
 
         override fun onResponse(call: Call<FilmDTO>, response: Response<FilmDTO>) {
             val serverResponse: FilmDTO? = response.body()
-                if (response.isSuccessful && serverResponse != null) {
-                    checkResponse(serverResponse)
-                } else {
-                    liveDataObserver.postValue(AppState.Error(Throwable(SERVER_ERROR)))
-                }
+            if (response.isSuccessful && serverResponse != null) {
+                categoriesList.add(convertDTOtoModel(serverResponse))
+                liveDataObserver.postValue(AppState.Success(categoriesList))
+            } else {
+                liveDataObserver.postValue(AppState.Error(Throwable(SERVER_ERROR)))
+            }
         }
-
         override fun onFailure(call: Call<FilmDTO>, t: Throwable) {
             liveDataObserver.postValue(AppState.Error(Throwable(t.message ?: REQUEST_ERROR)))
         }
-
-        private fun checkResponse(serverResponse: FilmDTO) {
-            facade.savePopularFilms(convertDTOtoModel(serverResponse))
-            sleep(5000)  //FIXE THIS
-            getPopularData()
-        }
     }
 
-    private fun getDataFromServer() {
-        facade.getServerData(callBack)
+    private fun getDataFromLocalSource() {
+        facade.getLocalData(callbackDB)
     }
 
     private val callbackDB = object : CallbackDB {
@@ -67,54 +73,7 @@ class MainViewModel(
         }
     }
 
-    private fun getRecentData(){
-        facade.getDBRecentFilms(callbackDB)
-    }
-
-    private fun getFavoriteData(){
-        facade.getDBFavoriteFilms(callbackDB)
-    }
-
-    private fun getWatchedData(){
-        facade.getDBWatchedFilms(callbackDB)
-    }
-
-    private fun getWillWatchData(){
-        facade.getDBWillWatchFilms(callbackDB)
-    }
-
-    private fun getPopularData(){
-        facade.getDBPopularFilms(callbackDB)
-    }
-
-    private fun getData(){
-        categoriesList.clear()
-        liveDataObserver.postValue(AppState.Loading)
-        getDataFromServer()
-        getRecentData()
-        getFavoriteData()
-        getPopularData()
-        getWatchedData()
-        getWillWatchData()
-    }
-
     fun saveRecentFilmToDB(film : Film) {
         facade.saveRecentFilm(film)
     }
-
-    fun saveFavoriteFilmToDB(film : Film) {
-        facade.saveFavoriteFilm(film)
-    }
-
-    fun saveWatchedFilmToDB(film : Film) {
-        facade.saveWatchedFilm(film)
-    }
-
-    fun saveWillWatchedFilmToDB(film : Film) {
-        facade.saveWillWatchFilm(film)
-    }
-
-//    fun savePopularFilmToDB(films: List<Film>) {
-//        facade.savePopularFilms(films)
-//    }
 }
