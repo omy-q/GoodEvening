@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.example.goodevening.app.App.Companion.getDB
 import com.example.goodevening.domainmodel.CategoryFilm
 import com.example.goodevening.domainmodel.Film
+import com.example.goodevening.domainmodel.model.CallbackDB
 import com.example.goodevening.domainmodel.moviedb.FilmDTO
 import com.example.goodevening.domainmodel.moviedb.RemoteDataSource
 import com.example.goodevening.domainmodel.model.Facade
@@ -48,10 +49,8 @@ class MainViewModel(
 
         private fun checkResponse(serverResponse: FilmDTO) {
             facade.savePopularFilms(convertDTOtoModel(serverResponse))
-//            getPopularData()
-//            categoriesList.add(convertDTOtoModel(serverResponse))
-//            liveDataObserver.postValue(AppState.Success(categoriesList))
-
+            sleep(5000)  //FIXE THIS
+            getPopularData()
         }
     }
 
@@ -59,39 +58,33 @@ class MainViewModel(
         facade.getServerData(callBack)
     }
 
-    private fun getRecentData(){
-        if (facade.getDBRecentFilms().films.isNotEmpty()){
-            categoriesList.add(facade.getDBRecentFilms())
-            liveDataObserver.postValue(AppState.Success(categoriesList))
+    private val callbackDB = object : CallbackDB {
+        override fun onResponse(result: CategoryFilm) {
+            if(result.films.isNotEmpty()){
+                categoriesList.add(result)
+                liveDataObserver.postValue(AppState.Success(categoriesList))
+            }
         }
+    }
+
+    private fun getRecentData(){
+        facade.getDBRecentFilms(callbackDB)
     }
 
     private fun getFavoriteData(){
-        if (facade.getDBFavoriteFilms().films.isNotEmpty()){
-            categoriesList.add(facade.getDBFavoriteFilms())
-            liveDataObserver.postValue(AppState.Success(categoriesList))
-        }
+        facade.getDBFavoriteFilms(callbackDB)
     }
 
     private fun getWatchedData(){
-        if (facade.getDBWatchedFilms().films.isNotEmpty()){
-            categoriesList.add(facade.getDBWatchedFilms())
-            liveDataObserver.postValue(AppState.Success(categoriesList))
-        }
+        facade.getDBWatchedFilms(callbackDB)
     }
 
     private fun getWillWatchData(){
-        if (facade.getDBWillWatchFilms().films.isNotEmpty()){
-            categoriesList.add(facade.getDBWillWatchFilms())
-            liveDataObserver.postValue(AppState.Success(categoriesList))
-        }
+        facade.getDBWillWatchFilms(callbackDB)
     }
 
     private fun getPopularData(){
-        if (facade.getDBPopularFilms().films.isNotEmpty()){
-            categoriesList.add(facade.getDBPopularFilms())
-            liveDataObserver.postValue(AppState.Success(categoriesList))
-        }
+        facade.getDBPopularFilms(callbackDB)
     }
 
     private fun getData(){
@@ -124,6 +117,4 @@ class MainViewModel(
 //    fun savePopularFilmToDB(films: List<Film>) {
 //        facade.savePopularFilms(films)
 //    }
-
-
 }

@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.goodevening.R
 import com.example.goodevening.domainmodel.CategoryFilm
+import kotlinx.android.synthetic.main.parent_item_view.view.*
 
-class FilmParentAdapter(private val onItemViewClickListener: OnItemViewClickListener?) :
+class FilmParentAdapter(private val onItemViewClickListener: OnItemViewClickListener?,
+    private val onMoreBottomClickListener: OnMoreButtonClickListener) :
     RecyclerView.Adapter<FilmParentAdapter.ParentViewHolder>() {
 
     private lateinit var childAdapters: MutableList<FilmAdapter>
@@ -44,6 +46,9 @@ class FilmParentAdapter(private val onItemViewClickListener: OnItemViewClickList
             with(itemView) {
                 findViewById<TextView>(R.id.test).text = filmCategory.category
                 childRecyclerView = findViewById(R.id.RecyclerViewFilm)
+                more.setOnClickListener{
+                    onMoreBottomClickListener.onMoreButtonClick(filmCategory)
+                }
             }
             with(childRecyclerView) {
                 layoutManager =

@@ -2,11 +2,16 @@ package com.example.goodevening.domainmodel.room.favoritefilms
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.example.goodevening.domainmodel.utils.DateConverter
+import java.util.*
 
 @Entity
 data class FavoriteEntity (
     @PrimaryKey
     val id: Long,
+//    @TypeConverters(DateConverter::class)
+    val date: Long,
     val filmName: String,
     val filmDescription: String,
     val filmYear: String,

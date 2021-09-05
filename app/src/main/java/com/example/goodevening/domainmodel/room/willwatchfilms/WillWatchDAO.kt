@@ -10,6 +10,9 @@ interface WillWatchDAO {
     @Query("SELECT * FROM WillWatchEntity")
     fun all(): List<WillWatchEntity>
 
+    @Query("SELECT * FROM WillWatchEntity ORDER BY date")
+    fun allOrderByDate(): List<WillWatchEntity>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(entity: WillWatchEntity)
 }

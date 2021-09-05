@@ -2,6 +2,7 @@ package com.example.goodevening.domainmodel.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.example.goodevening.domainmodel.room.favoritefilms.FavoriteDAO
 import com.example.goodevening.domainmodel.room.favoritefilms.FavoriteEntity
 import com.example.goodevening.domainmodel.room.genres.GenresDAO
@@ -14,6 +15,7 @@ import com.example.goodevening.domainmodel.room.watchedfilms.WatchedDAO
 import com.example.goodevening.domainmodel.room.watchedfilms.WatchedEntity
 import com.example.goodevening.domainmodel.room.willwatchfilms.WillWatchDAO
 import com.example.goodevening.domainmodel.room.willwatchfilms.WillWatchEntity
+import com.example.goodevening.domainmodel.utils.DateConverter
 
 
 @Database(entities = [
@@ -25,6 +27,7 @@ import com.example.goodevening.domainmodel.room.willwatchfilms.WillWatchEntity
     PopularEntity::class],
     version = 1, exportSchema = false
 )
+//@TypeConverters(DateConverter::class)
 abstract class DataBase : RoomDatabase() {
     abstract fun genresDao(): GenresDAO
     abstract fun recentDao(): RecentDAO

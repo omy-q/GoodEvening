@@ -10,6 +10,9 @@ interface FavoriteDAO {
     @Query("SELECT * FROM FavoriteEntity")
     fun all(): List<FavoriteEntity>
 
+    @Query("SELECT * FROM FavoriteEntity ORDER BY date")
+    fun allOrderByDate(): List<FavoriteEntity>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(entity: FavoriteEntity)
 }
