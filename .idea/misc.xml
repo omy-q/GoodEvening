@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/layout/child_item_view.xml" value="0.1" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/layout/film_description.xml" value="0.1" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/layout/film_fragment.xml" value="0.1" />
         <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/layout/parent_item_view.xml" value="0.1" />
       </map>
     </option>
