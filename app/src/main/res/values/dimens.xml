@@ -3,6 +3,7 @@
     <dimen name="text_size">10sp</dimen>
     <dimen name="text_size_main_screen">15sp</dimen>
     <dimen name="text_size_main_screen_name">18sp</dimen>
+    <dimen name="text_size_category_screen">20sp</dimen>
     <dimen name="text_size_name">15sp</dimen>
     <dimen name="padding">5dp</dimen>
     <dimen name="height_film_image">250dp</dimen>

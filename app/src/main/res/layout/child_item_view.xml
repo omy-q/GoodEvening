@@ -8,7 +8,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/item_card_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="350dp"
         app:cardCornerRadius="10dp"
         android:backgroundTint="@color/background_item_card_view">
 
@@ -32,6 +32,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="5dp"
+                android:paddingStart="3dp"
+                android:paddingEnd="3dp"
+                android:maxLines="2"
                 android:textSize="@dimen/text_size_main_screen_name"
                 android:textColor="@color/text_color_main_screen"/>
 
@@ -41,6 +44,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="5dp"
+                android:paddingStart="3dp"
+                android:paddingEnd="3dp"
                 android:textSize="@dimen/text_size_main_screen"
                 android:textColor="@color/text_color_main_screen"/>
 
@@ -50,6 +55,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="5dp"
+                android:paddingStart="3dp"
+                android:paddingEnd="3dp"
                 android:paddingBottom="5dp"
                 android:textSize="@dimen/text_size_main_screen"
                 android:textColor="@color/text_color_main_screen"/>

@@ -18,6 +18,7 @@
     <color name="text_color_more_btn">#EFEFF3</color>
 
     <color name="text_color_main_screen">#090627</color>
+    <color name="text_color_category_screen">#E4E4EC</color>
 
     <color name="center_color">#DFED8E</color>
     <color name="end_color">#84E681</color>

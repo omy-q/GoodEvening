@@ -57,7 +57,7 @@ class CategoryFilmFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         with(binding){
             category.text = categoryFilms?.category
-            categoryRecyclerView.layoutManager = GridLayoutManager(context, 3)
+            categoryRecyclerView.layoutManager = GridLayoutManager(context, 2)
             categoryRecyclerView.adapter = categoryAdapter
             categoryFilms?.let { categoryAdapter.setData(it.films) }
         }
