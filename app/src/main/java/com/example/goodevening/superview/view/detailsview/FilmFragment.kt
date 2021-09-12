@@ -77,9 +77,7 @@ class FilmFragment : Fragment() {
         with(binding) {
             filmName.text = film.name
             filmRating.text = film.average.toString()
-            filmTime.text = "2.15"
             filmYear.text = film.year
-            filmCountry.text = "US"
             filmDescription.poster.load(film.poster)
 //            Picasso
 //                .get()

@@ -13,4 +13,5 @@
     <string name="child">child</string>
     <string name="adult_or_child">18+</string>
     <string name="see_more">more</string>
+    <string name="film_name">DEFAULT</string>
 </resources>

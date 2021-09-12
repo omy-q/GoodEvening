@@ -4,6 +4,9 @@
     <dimen name="text_size_main_screen">15sp</dimen>
     <dimen name="text_size_main_screen_name">18sp</dimen>
     <dimen name="text_size_category_screen">20sp</dimen>
+    <dimen name="text_size_film_screen_name">25sp</dimen>
+    <dimen name="text_size_film_screen">18sp</dimen>
+    <dimen name="text_size_film_screen_menu">15sp</dimen>
     <dimen name="text_size_name">15sp</dimen>
     <dimen name="padding">5dp</dimen>
     <dimen name="height_film_image">250dp</dimen>
@@ -11,6 +14,6 @@
     <dimen name="width_description">150dp</dimen>
     <dimen name="test">500dp</dimen>
     <dimen name="item_menu_size">50dp</dimen>
-    <dimen name="rating_text_size">25sp</dimen>
+    <dimen name="rating_text_size">20sp</dimen>
     <dimen name="text_size_main_screen_category">20sp</dimen>
 </resources>
