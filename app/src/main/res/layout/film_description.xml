@@ -18,7 +18,7 @@
         android:layout_width="@dimen/width_description"
         android:layout_height="@dimen/height_description"
         android:layout_margin="5dp"
-        android:scaleType="centerCrop"
+        android:scaleType="centerInside"
         android:src="@drawable/film_test"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/RecyclerGenres"
