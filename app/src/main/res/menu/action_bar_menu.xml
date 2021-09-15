@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="@string/cinema_map"
+        android:id="@+id/menu_cinema_map"
+        app:showAsAction="always"
+        android:orderInCategory="1"
+        android:icon="@drawable/ic_cinema_map"/>
+    <item
+        android:title="@string/favorite"
+        android:id="@+id/menu_favorite"
+        app:showAsAction="never"
+        android:orderInCategory="20"/>
+    <item
+        android:title="@string/watch_later"
+        android:id="@+id/menu_watch_later"
+        app:showAsAction="never"
+        android:orderInCategory="30"/>
+    <item
+        android:title="@string/watched"
+        android:id="@+id/menu_watched"
+        app:showAsAction="never"
+        android:orderInCategory="40"/>
+</menu>

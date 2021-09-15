@@ -1,6 +1,5 @@
 package com.example.goodevening.superview.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.goodevening.app.App.Companion.getDB
@@ -17,7 +16,6 @@ import com.example.goodevening.domainmodel.utils.convertDTOtoModel
 import retrofit2.Response
 import retrofit2.Callback
 import retrofit2.Call
-import java.lang.Thread.sleep
 
 
 private const val SERVER_ERROR = "Ошибка сервера"
@@ -29,6 +27,7 @@ class MainViewModel(
 ) : ViewModel() {
 
     private var categoriesList : MutableList<CategoryFilm> = mutableListOf()
+    private var menuCategoriesList: MutableMap<String, CategoryFilm> = mutableMapOf()
     private val GENRES = "with_genres"
     private val POPULAR = "Popular"
 
@@ -54,7 +53,7 @@ class MainViewModel(
             if (response.isSuccessful && serverResponse != null) {
                 val category = getCategory(response)
                 categoriesList.add(convertDTOtoModel(category, serverResponse))
-                liveDataObserver.postValue(AppState.Success(categoriesList))
+                liveDataObserver.postValue(AppState.Success(categoriesList, menuCategoriesList))
             } else {
                 liveDataObserver.postValue(AppState.Error(Throwable(SERVER_ERROR)))
             }
@@ -78,7 +77,18 @@ class MainViewModel(
         override fun onResponse(result: CategoryFilm) {
             if(result.films.isNotEmpty()){
                 categoriesList.add(result)
-                liveDataObserver.postValue(AppState.Success(categoriesList))
+                when(result.category){
+                    "Favorite films" -> {
+                        menuCategoriesList["favorite"] = result
+                    }
+                    "Watched films" -> {
+                        menuCategoriesList["watched"] = result
+                    }
+                    "Will watched films" -> {
+                        menuCategoriesList["willWatch"] = result
+                    }
+                }
+                liveDataObserver.postValue(AppState.Success(categoriesList, menuCategoriesList))
             }
         }
     }

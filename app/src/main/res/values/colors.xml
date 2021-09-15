@@ -33,5 +33,6 @@
     <color name="center_color">#DFED8E</color>
     <color name="test_color">#56DA96</color>
 
+    <color name="menu_item">#0D1549</color>
 
 </resources>
