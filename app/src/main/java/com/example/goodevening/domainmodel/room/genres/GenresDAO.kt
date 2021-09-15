@@ -11,5 +11,5 @@ interface GenresDAO {
     fun all(): List<GenresEntity>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(entity: GenresEntity)
+    fun insert(entities: List<GenresEntity>)
 }

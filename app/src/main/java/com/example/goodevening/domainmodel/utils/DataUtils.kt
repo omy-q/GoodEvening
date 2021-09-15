@@ -2,7 +2,9 @@ package com.example.goodevening.domainmodel.utils
 
 import com.example.goodevening.domainmodel.*
 import com.example.goodevening.domainmodel.moviedb.FilmDTO
+import com.example.goodevening.domainmodel.moviedb.GenresDTO
 import com.example.goodevening.domainmodel.room.favoritefilms.FavoriteEntity
+import com.example.goodevening.domainmodel.room.genres.GenresEntity
 import com.example.goodevening.domainmodel.room.popularfilms.PopularEntity
 import com.example.goodevening.domainmodel.room.recentfilms.RecentEntity
 import com.example.goodevening.domainmodel.room.watchedfilms.WatchedEntity
@@ -107,6 +109,30 @@ fun convertFilmsToPopularEntity(films : List<Film>): List<PopularEntity> {
             film.average.toString(), film.poster, Gson().toJson(film.genres)))
     }
     return popularEntities.toList()
+}
+
+fun convertDTOToMap(genresDTO : GenresDTO) : Map<Int, String> {
+    val genres = mutableMapOf<Int, String>()
+    genresDTO.genres.forEach {
+        genres[it.id] = it.name
+    }
+    return genres.toMap()
+}
+
+fun convertEntityToMap(genresEntity : List<GenresEntity>) : Map<Int, String> {
+    val genres = mutableMapOf<Int, String>()
+    genresEntity.forEach {
+        genres[it.id.toInt()] = it.genre
+    }
+    return genres.toMap()
+}
+
+fun convertToGenreEntity(genres : Map<Int, String>) : List<GenresEntity> {
+    val genresEntity = mutableListOf<GenresEntity>()
+    genres.keys.forEach { key ->
+        genres[key]?.let { genresEntity.add(GenresEntity(key, it)) }
+    }
+    return genresEntity
 }
 
 

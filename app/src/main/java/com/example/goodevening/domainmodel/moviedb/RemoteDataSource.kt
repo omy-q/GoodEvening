@@ -3,6 +3,7 @@ package com.example.goodevening.domainmodel.moviedb
 import com.example.goodevening.BuildConfig
 import com.example.goodevening.domainmodel.*
 import com.google.gson.GsonBuilder
+import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -62,5 +63,9 @@ class RemoteDataSource {
         filmApi.getFilmByGenre(
             REQUEST_API_KEY_VALUE,
             FANTASY_ID).enqueue(callback)
+    }
+
+    fun loadGenres(callback: Callback<GenresDTO>){
+        filmApi.getGenres(REQUEST_API_KEY_VALUE).enqueue(callback)
     }
 }

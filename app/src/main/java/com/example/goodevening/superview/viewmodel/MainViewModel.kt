@@ -7,12 +7,17 @@ import com.example.goodevening.domainmodel.CategoryFilm
 import com.example.goodevening.domainmodel.Film
 import com.example.goodevening.domainmodel.genres
 import com.example.goodevening.domainmodel.model.CallbackDB
+import com.example.goodevening.domainmodel.model.CallbackDBGenres
 import com.example.goodevening.domainmodel.moviedb.FilmDTO
 import com.example.goodevening.domainmodel.moviedb.RemoteDataSource
 import com.example.goodevening.domainmodel.model.Facade
 import com.example.goodevening.domainmodel.model.FacadeImpl
+import com.example.goodevening.domainmodel.moviedb.GenresDTO
 import com.example.goodevening.domainmodel.room.facade.RoomFacadeImpl
+import com.example.goodevening.domainmodel.room.genres.GenresEntity
+import com.example.goodevening.domainmodel.utils.convertDTOToMap
 import com.example.goodevening.domainmodel.utils.convertDTOtoModel
+import com.example.goodevening.domainmodel.utils.convertEntityToMap
 import retrofit2.Response
 import retrofit2.Callback
 import retrofit2.Call
@@ -25,6 +30,33 @@ class MainViewModel(
     private val liveDataObserver: MutableLiveData<AppState> = MutableLiveData(),
     private val facade: Facade = FacadeImpl(RemoteDataSource(), RoomFacadeImpl(getDB()))
 ) : ViewModel() {
+
+    init {
+        val callbackGenres = object : Callback<GenresDTO> {
+            override fun onResponse(call: Call<GenresDTO>, response: Response<GenresDTO>) {
+                val serverResponse: GenresDTO? = response.body()
+                if (response.isSuccessful && serverResponse != null) {
+                    genres = convertDTOToMap(serverResponse)
+                    facade.saveGenres(genres)
+                } else {
+                    facade.getDBGenres(callbackDBGenres)
+                }
+            }
+
+            override fun onFailure(call: Call<GenresDTO>, t: Throwable) {
+                facade.getDBGenres(callbackDBGenres)
+            }
+
+            private val callbackDBGenres = object : CallbackDBGenres {
+                override fun onResponse(result: List<GenresEntity>) {
+                    if(result.isNotEmpty()){
+                        genres = convertEntityToMap(result)
+                    }
+                }
+            }
+        }
+        facade.getGenres(callbackGenres)
+    }
 
     private var categoriesList : MutableList<CategoryFilm> = mutableListOf()
     private var menuCategoriesList: MutableMap<String, CategoryFilm> = mutableMapOf()
