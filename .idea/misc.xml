@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/drawable/favorite.xml" value="0.2703125" />
         <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/drawable/favorite_2.xml" value="0.2703125" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/drawable/favorite_pushed.xml" value="0.19907407407407407" />
         <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/drawable/gradient_background.xml" value="0.178125" />
         <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/drawable/ic_cinema_map.xml" value="0.2703125" />
         <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/drawable/recycler_view_parent_fone.xml" value="0.13854166666666667" />
@@ -27,6 +28,7 @@
         <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/menu/action_bar_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/menu/menu.xml" value="0.1" />
         <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="..\:/android/GeekBrains/Android_Kotlin/GoodEvening/app/src/main/res/layout/main_fragment.xml" value="0.176" />
       </map>
     </option>
   </component>
