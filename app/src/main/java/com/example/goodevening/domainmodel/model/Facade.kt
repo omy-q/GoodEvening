@@ -2,6 +2,7 @@ package com.example.goodevening.domainmodel.model
 
 import com.example.goodevening.domainmodel.Film
 import com.example.goodevening.domainmodel.moviedb.FilmDTO
+import com.example.goodevening.domainmodel.moviedb.GenresDTO
 
 interface Facade {
     fun getServerData(callback: retrofit2.Callback<FilmDTO>)
@@ -21,4 +22,7 @@ interface Facade {
     fun saveWillWatchFilm(film: Film)
     fun savePopularFilms(films : List<Film>)
 
+    fun saveGenres(genres : Map<Int, String>)
+    fun getDBGenres(callbackDBGenres: CallbackDBGenres)
+    fun getGenres(callback: retrofit2.Callback<GenresDTO>)
 }

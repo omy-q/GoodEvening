@@ -5,6 +5,7 @@ import android.os.HandlerThread
 import android.os.Looper
 import com.example.goodevening.domainmodel.*
 import com.example.goodevening.domainmodel.moviedb.FilmDTO
+import com.example.goodevening.domainmodel.moviedb.GenresDTO
 import com.example.goodevening.domainmodel.moviedb.RemoteDataSource
 import com.example.goodevening.domainmodel.room.facade.RoomFacade
 import com.example.goodevening.domainmodel.utils.*
@@ -15,6 +16,25 @@ class FacadeImpl(private val remoteDataSource: RemoteDataSource,
 ) : Facade {
 
     private val handlerMain = Handler(Looper.getMainLooper())
+
+    override fun getGenres(callback: retrofit2.Callback<GenresDTO>) {
+        Thread{
+            remoteDataSource.loadGenres(callback)
+        }.start()
+    }
+
+    override fun saveGenres(genres: Map<Int, String>) {
+        Thread {
+            localDataSource.getGenres().insert(convertToGenreEntity(genres))
+        }.start()
+    }
+
+    override fun getDBGenres(callbackDBGenres: CallbackDBGenres) {
+        Thread {
+            val data = localDataSource.getGenres().all()
+            handlerMain.post { callbackDBGenres.onResponse(data) }
+        }.start()
+    }
 
     override fun getServerData(callback: retrofit2.Callback<FilmDTO>){
         Thread {

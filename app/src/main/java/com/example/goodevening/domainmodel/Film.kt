@@ -14,7 +14,7 @@ class Film(
     val poster : String
 ) : Parcelable{}
 
-val genres = mapOf(28 to "Action", 12 to "Adventure", 16 to "Animation",
+var genres = mapOf(28 to "Action", 12 to "Adventure", 16 to "Animation",
     35 to "Comedy", 80 to "Crime", 99 to "Documentary",
     18 to "Drama", 10751 to "Family", 14 to "Fantasy",
     36 to "History", 27 to "Horror", 10402 to "Music",

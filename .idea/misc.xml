@@ -3,10 +3,30 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/layout/child_item_view.xml" value="0.1" />
-        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/layout/film_description.xml" value="0.1" />
-        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/layout/film_fragment.xml" value="0.1" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/drawable/favorite.xml" value="0.2703125" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/drawable/favorite_2.xml" value="0.2703125" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/drawable/gradient_background.xml" value="0.178125" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/drawable/ic_cinema_map.xml" value="0.2703125" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/drawable/recycler_view_parent_fone.xml" value="0.13854166666666667" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/drawable/roundedbutton.xml" value="0.13854166666666667" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/drawable/share.xml" value="0.2703125" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/drawable/watch_later.xml" value="0.2703125" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/drawable/watch_later_pushed.xml" value="0.2703125" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/drawable/watched.xml" value="0.2703125" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/drawable/watched_pushed.xml" value="0.2703125" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/layout/actionbar_switch.xml" value="0.12360688956433637" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/layout/activity_main.xml" value="0.14855072463768115" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/layout/category_film_fragment.xml" value="0.14855072463768115" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/layout/child_item_view.xml" value="0.264" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/layout/film_description.xml" value="0.2" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/layout/film_fragment.xml" value="0.152" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/layout/genre_item_view.xml" value="0.8" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/layout/main_content.xml" value="0.12360688956433637" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/layout/main_fragment.xml" value="0.14855072463768115" />
         <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/layout/parent_item_view.xml" value="0.1" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/menu/action_bar_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/menu/menu.xml" value="0.1" />
+        <entry key="..\:/android/Android_Kotlin/GoodEvening/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
       </map>
     </option>
   </component>

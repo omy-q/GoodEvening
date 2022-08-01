@@ -4,23 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp">
+    android:background="@color/background_item_card_view">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RecyclerGenres"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="5dp"/>
 
     <ImageView
         android:id="@+id/poster"
         android:layout_width="@dimen/width_description"
         android:layout_height="@dimen/height_description"
+        android:scaleType="centerCrop"
         android:layout_margin="5dp"
-        android:scaleType="centerInside"
         android:src="@drawable/film_test"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/RecyclerGenres"
         app:layout_constraintEnd_toStartOf="@id/descriptionScrollView"/>
 
@@ -37,7 +40,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="@string/test_description"
+            android:textSize="@dimen/text_size_film_screen"
+            android:textColor="@color/text_color_film_screen"
             app:layout_constraintStart_toEndOf="@id/poster"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/descriptionScrollView"

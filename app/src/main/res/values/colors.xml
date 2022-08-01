@@ -7,7 +7,32 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
     <color name="loadingBackground">#80ACD5EE</color>
     <color name="actionbar">#0D1549</color>
     <color name="main">#202A6C</color>
+
+    <color name="background_item_card_view">#80854AD8</color>
+
+    <color name="background_genres">#721AEF</color>
+    <color name="text_color_genres">#EFEFF3</color>
+
+    <color name="background_more_btn">#541BBD</color>
+    <color name="text_color_more_btn">#EFEFF3</color>
+
+    <color name="background_rating_btn">#F0DF42</color>
+    <color name="text_color_rating_btn">#342463</color>
+
+    <color name="text_color_main_screen">#090627</color>
+    <color name="text_color_category_screen">#E4E4EC</color>
+    <color name="text_color_film_screen">#010130</color>
+
+    <color name="background_film_year">#E69838DC</color>
+    <color name="color_btn_not_push">#E66438DC</color>
+
+    <color name="center_color">#DFED8E</color>
+    <color name="test_color">#56DA96</color>
+
+    <color name="menu_item">#0D1549</color>
+
 </resources>

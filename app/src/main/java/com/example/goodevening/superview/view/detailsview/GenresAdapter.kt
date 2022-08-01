@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.goodevening.R
 
-class GenresAdapter : RecyclerView.Adapter<GenresAdapter.GenreViewHolder>() {
+class   GenresAdapter : RecyclerView.Adapter<GenresAdapter.GenreViewHolder>() {
 
     private lateinit var genres: List<String>
 

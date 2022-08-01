@@ -18,4 +18,9 @@ interface FilmAPI {
         @Query(GENRE_BY_ID) genreID: Int
     ) : Call<FilmDTO>
 
+    @GET("genre/movie/list")
+    fun getGenres(
+        @Query(REQUEST_API_KEY_NAME) token: String,
+    ) : Call<GenresDTO>
+
 }
